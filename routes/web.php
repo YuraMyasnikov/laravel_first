@@ -21,7 +21,7 @@ use App\Http\Controllers\ProductController;
     Route::get('/', [HomeController::class, 'home'])->name('home');
     Route::get('/categories', [CategoryController::class, 'categories'])->name('categories');
     Route::get('/{category}', [CategoryController::class, 'category'])->name('category');
-
+    Route::get('/{category}/{product?}', [CategoryController::class, 'product'])->name('product');
 
    /* Route::get('/basket', [HomeController::class, 'basket'])->name('basket');
     Route::get('/basket/order', [HomeController::class, 'basketPlace'])->name('basketPlace');*/

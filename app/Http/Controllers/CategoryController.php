@@ -19,13 +19,18 @@ class CategoryController extends Controller
         return view('categories', compact('categories'));
     }
 
-    public function category ($category_code)
+    public function category ($category_code, $product_code=null)
     {
         $category = Category::where('code', $category_code)->first();
-        dd($category);
+
         return view('category',compact('category'));
     }
 
-
+    public function product ($category_code, $product_code=null)
+    {
+        $category = Category::where('code', $category_code)->first();
+        $product = $category->products->where('code',$product_code)->first();
+        return view('product',compact('product'));
+    }
 
 }

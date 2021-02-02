@@ -10,7 +10,8 @@
 
             <p>
                 <a href="" class="btn btn-success" >Добавить в корзину</a>
-                <a href="" class="btn btn-default" >Подробнее</a>
+                <a href="{{ route('product',[$product->category->code, $product->code]) }}" class="btn btn-default"
+                >Подробнее</a>
             </p>
         </div>
     </div>
