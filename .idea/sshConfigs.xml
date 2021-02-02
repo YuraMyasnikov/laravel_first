@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SshConfigs">
+    <configs>
+      <sshConfig host="yura.true-false.ru" id="2ea8c3ed-f879-4b5a-979e-f6968defae95" keyPath="C:\Users\Yura\.ssh\id_rsa" port="45987" nameFormat="DESCRIPTIVE" username="yura" />
+    </configs>
+  </component>
+</project>

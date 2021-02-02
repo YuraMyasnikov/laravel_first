@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="cf860173-612d-4738-878c-ed4ebc5989e0" name="test">
+        <fileTransfer rootFolder="/var/www/yura/data/www/yura.true-false.ru" accessType="SFTP" host="yura.true-false.ru" port="45987" sshConfigId="2ea8c3ed-f879-4b5a-979e-f6968defae95" sshConfig="yura@yura.true-false.ru:45987 key" keyPair="true">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
