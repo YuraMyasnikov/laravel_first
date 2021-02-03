@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Фев 03 2021 г., 16:15
+-- Время создания: Фев 03 2021 г., 18:32
 -- Версия сервера: 10.3.22-MariaDB
 -- Версия PHP: 7.4.5
 
@@ -66,7 +66,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (5, '2021_02_01_094419_create_categories_table', 1),
 (6, '2021_02_01_094436_create_products_table', 1),
 (7, '2021_02_03_080914_create_orders_table', 1),
-(8, '2021_02_03_082616_create_order_product_table', 1);
+(8, '2021_02_03_082616_create_order_product_table', 1),
+(10, '2021_02_03_141353_update_order_product_table', 2);
 
 -- --------------------------------------------------------
 
@@ -100,6 +101,7 @@ CREATE TABLE `order_product` (
   `id` int(11) NOT NULL,
   `order_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
+  `count` int(11) NOT NULL DEFAULT 1,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -108,31 +110,9 @@ CREATE TABLE `order_product` (
 -- Дамп данных таблицы `order_product`
 --
 
-INSERT INTO `order_product` (`id`, `order_id`, `product_id`, `created_at`, `updated_at`) VALUES
-(1, 2, 1, NULL, NULL),
-(2, 2, 1, NULL, NULL),
-(3, 2, 3, NULL, NULL),
-(4, 2, 3, NULL, NULL),
-(5, 2, 3, NULL, NULL),
-(6, 2, 3, NULL, NULL),
-(7, 2, 3, NULL, NULL),
-(8, 2, 3, NULL, NULL),
-(9, 2, 3, NULL, NULL),
-(10, 2, 3, NULL, NULL),
-(11, 2, 3, NULL, NULL),
-(12, 2, 3, NULL, NULL),
-(13, 2, 3, NULL, NULL),
-(14, 2, 8, NULL, NULL),
-(15, 2, 2, NULL, NULL),
-(16, 2, 12, NULL, NULL),
-(17, 2, 9, NULL, NULL),
-(18, 2, 5, NULL, NULL),
-(19, 2, 5, NULL, NULL),
-(20, 2, 5, NULL, NULL),
-(21, 2, 1, NULL, NULL),
-(22, 2, 1, NULL, NULL),
-(23, 2, 5, NULL, NULL),
-(24, 2, 9, NULL, NULL);
+INSERT INTO `order_product` (`id`, `order_id`, `product_id`, `count`, `created_at`, `updated_at`) VALUES
+(35, 2, 5, 2, '2021-02-03 11:53:30', '2021-02-03 12:20:04'),
+(38, 2, 8, 1, '2021-02-03 12:27:49', '2021-02-03 12:27:49');
 
 -- --------------------------------------------------------
 
@@ -218,7 +198,7 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT для таблицы `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT для таблицы `orders`
@@ -230,7 +210,7 @@ ALTER TABLE `orders`
 -- AUTO_INCREMENT для таблицы `order_product`
 --
 ALTER TABLE `order_product`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT для таблицы `products`

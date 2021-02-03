@@ -26,6 +26,7 @@ use App\Http\Controllers\BasketController;
     Route::get('/basket', [BasketController::class, 'basket'])->name('basket');
     Route::get('/basket/order', [BasketController::class, 'basketPlace'])->name('basketPlace');
     Route::post('/basket/add/{product_id}', [BasketController::class, 'basketAdd'])->name('basketAdd');
+    Route::post('/basket/del/{product_id}', [BasketController::class, 'basketDel'])->name('basketDel');
 
 
     Route::get('/{category}', [CategoryController::class, 'category'])->name('category');

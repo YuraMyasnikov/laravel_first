@@ -25,12 +25,14 @@
                             {{ $product->name}}
                         </a>
                     </td>
-                    <td><span class="badge">1</span>
+                    <td><span class="badge">{{ $product->pivot->count }}</span>
                         <div class="btn-group form-inline">
-                            <form action="http://internet-shop.tmweb.ru/basket/remove/1" method="POST">
-                                <button type="submit" class="btn btn-danger" href=""><span
-                                        class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>
-                                <input type="hidden" name="_token" value="cNsAeFCPUojidBKsTSDyrmGX6JmjnoTcluwNF1EF">                            </form>
+                            <form action="{{ route('basketDel',$product->id) }}" method="POST">
+                                <button type="submit" class="btn btn-danger">
+                                    <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+                                </button>
+                                @csrf
+                            </form>
                             <form action="{{ route('basketAdd',$product->id) }}" method="POST">
                                 <button type="submit" class="btn btn-success">
                                     <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
@@ -39,13 +41,13 @@
                             </form>
                         </div>
                     </td>
-                    <td>71990 ₽</td>
-                    <td>71990 ₽</td>
+                    <td>{{$product->price}} ₽</td>
+                    <td>{{$product->getPriceForCount()}} ₽</td>
                 </tr>
                 @endforeach
                 <tr>
                     <td colspan="3">Общая стоимость:</td>
-                    <td>71990 ₽</td>
+                    <td>{{$order->getFullPrice()}} ₽</td>
                 </tr>
                 </tbody>
             </table>
