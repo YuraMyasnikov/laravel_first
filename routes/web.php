@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\App;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\BasketController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,9 +21,14 @@ use App\Http\Controllers\ProductController;
 
     Route::get('/', [HomeController::class, 'home'])->name('home');
     Route::get('/categories', [CategoryController::class, 'categories'])->name('categories');
-    Route::get('/{category}', [CategoryController::class, 'category'])->name('category');
-    Route::get('/{category}/{product?}', [CategoryController::class, 'product'])->name('product');
 
-   /* Route::get('/basket', [HomeController::class, 'basket'])->name('basket');
-    Route::get('/basket/order', [HomeController::class, 'basketPlace'])->name('basketPlace');*/
+
+    Route::get('/basket', [BasketController::class, 'basket'])->name('basket');
+    Route::get('/basket/order', [BasketController::class, 'basketPlace'])->name('basketPlace');
+    Route::post('/basket/add/{product_id}', [BasketController::class, 'basketAdd'])->name('basketAdd');
+
+
+    Route::get('/{category}', [CategoryController::class, 'category'])->name('category');
+    Route::get('/{category}/{product}', [CategoryController::class, 'product'])->name('product');
+
 

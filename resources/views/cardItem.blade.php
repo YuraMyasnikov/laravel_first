@@ -9,9 +9,11 @@
             <p>{{ $product->price }} ₽</p>
 
             <p>
-                <a href="" class="btn btn-success" >Добавить в корзину</a>
-                <a href="{{ route('product',[$product->category->code, $product->code]) }}" class="btn btn-default"
-                >Подробнее</a>
+            <form action="{{ route('basketAdd', $product) }}" method="post">
+                @csrf
+                <button type="submit" class="btn btn-success"> В корзину</button>
+                <a href="{{ route('product',[$product->category->code, $product->code]) }}" class="btn btn-default">Подробнее</a>
+            </form>
             </p>
         </div>
     </div>

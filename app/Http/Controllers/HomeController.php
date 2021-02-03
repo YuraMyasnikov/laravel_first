@@ -16,14 +16,4 @@
             return view('index', compact('products'));
         }
 
-        public function basket()
-        {
-            return view('basket');
-        }
-
-        public function basketPlace()
-        {
-            return view('basketPlace');
-        }
-
     }
