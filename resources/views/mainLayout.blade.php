@@ -48,7 +48,20 @@
 </nav>
 
 <div class="container">
-    @yield('content')
+
+    @if(session()->has('success'))
+        <p class="alert alert-success" style="height: 50px; margin: 20px 0; text-align: center">
+            {{ session()->get('success') }}
+        </p>
+    @elseif(session()->has('error'))
+        <p class="alert alert-danger" style="height: 50px; margin: 20px 0; text-align: center">
+            {{ session()->get('error') }}
+        </p>
+    @endif
+
+    <div class="starter-template">
+        @yield('content')
+    </div>
 </div>
 </body>
 </html>

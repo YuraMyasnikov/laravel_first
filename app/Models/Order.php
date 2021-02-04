@@ -27,4 +27,17 @@ class Order extends Model
         return $sum;
     }
 
+    public function confirmedOrder($name, $phone)
+    {
+        if ($this->order == 0)
+        {
+            $this->name = $name;
+            $this->phone = $phone;
+            $this->status = 1;
+            $this->save();
+            session()->forget('order_id');
+            return true;
+        }
+    }
+
 }

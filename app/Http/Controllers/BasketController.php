@@ -7,12 +7,20 @@ use Illuminate\Routing\Controller;
 use Illuminate\Database\Eloquent\Collection;
 
 use App\Models\Order;
+use App\Models\Product;
 
 class BasketController extends Controller
 {
+    /** Корзина
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     *
+     * $order_id         Выбраные товары
+     * $order            Поле заявки на выбраные товары         [ id | status | name | phone | created_at | updated|at ]
+     *
+     */
     public function basket()
     {
-        $order_id = session('order_idd');
+        $order_id = session('order_id');
         if(!is_null($order_id))
         {
             $order = Order::findOrFail($order_id);
@@ -20,54 +28,120 @@ class BasketController extends Controller
         return view('basket', compact('order'));
     }
 
+
+
+    /**Указать контакты заказа
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\RedirectResponse
+     *
+     * $order_id         Выбраные товары
+     * $order            Поле заявки на выбраные товары         [ id | status | name | phone | created_at | updated|at ]
+     *
+     */
     public function basketPlace()
     {
-        return view('basketPlace');
+        $order_id = session('order_id');
+        // Если никаких товаров не выбрано
+        if (is_null($order_id))
+        {
+            return redirect()->route('home');
+        }
+        //Узнаю поле заявки на выбраные товары
+        $order = Order::find($order_id);
+
+        return view('basketPlace', compact('order'));
     }
 
+    //Подтверждение заказа
+    public function basketConfirm( Request $request)
+    {
+        $order_id = session('order_id');
+        // Если никаких товаров не выбрано
+        if (is_null($order_id))
+        {
+            return redirect()->route('home');
+        }
+        //Узнаю поле заявки на выбраные товары
+        $order = Order::find($order_id);
+
+        $success = $order->confirmedOrder($request->name, $request->phone);
+
+        if ($success)
+        {
+            session()->flash('success', 'Заявка принята, в ближайшее время тебе позвонят');
+        }
+        else{
+            session()->flash('error', 'Какая то хуйня, попробуй повторить заказ');
+        }
+
+        return redirect()->route('home');
+    }
+
+    /**
+     * @param $product_id
+     * @return \Illuminate\Http\RedirectResponse
+     *
+     * $order_id         Выбраные товары
+     * $order            Поле заявки на выбраные товары     [ id | status | name | phone | created_at | updated|at ]
+     * $pivotRow         Поле сводной таблицы               [ order_id | product_id | count | created_at | updated_at ]
+     *
+     * contains()       laravel | проверка на наличие
+     * attach()         laravel | добавить
+     *
+     */
     public function basketAdd($product_id)
     {
-        //сессия
-        $order_id = session('order_idd');
+        $order_id = session('order_id');
         //если сессия пустая
         if( is_null($order_id) )
         {
-            //создаю слудующее поле в таблице
             $order = Order::create();
-            //заполняю сессию номером следующего поля таблицы Ордер
-            session(['order_idd' => $order->id]);
+            session(['order_id' => $order->id]);
         }
         else
         {
-            // беру из таблица Ордер поле заказа
             $order = Order::find($order_id);
         }
-
-        //проверка - добален ли товар уже в корзину
         if($order->products->contains($product_id))
         {
             $pivotRow = $order->products()->where('product_id' , $product_id)->first()->pivot;
             $pivotRow->count++;
             $pivotRow->update();
+
         }else
         {
             $order->products()->attach($product_id);
         }
 
+        $product = Product::find($product_id);
+
+        session()->flash('success', 'Добавлен товар: ' . $product->name );
+
         //используется редирект чтобы при обновлении стр. не добавлялось доп поле
         return redirect()->route('basket');
     }
 
+    /**
+     * @param $product_id
+     * @return \Illuminate\Http\RedirectResponse
+     *
+     * $order_id         Выбраные товары
+     * $order            Поле заявки на выбраные товары     [ id | status | name | phone | created_at | updated|at ]
+     * $pivotRow         Поле сводной таблицы               [ order_id | product_id | count | created_at | updated_at ]
+     *
+     * contains()       laravel | проверка на наличие
+     * detach()         laravel | удалить/убрать
+     *
+     */
     public function basketDel($product_id)
     {
-        $order_id = session('order_idd');
+        $order_id = session('order_id');
+        $order_id = session('order_id');
         if( is_null($order_id) )
         {
             //используется редирект чтобы при обновлении стр. не добавлялось доп поле
             return redirect()->route('basket');
         }
 
-        // беру из таблица Ордер поле заказа
         $order = Order::find($order_id);
 
         if($order->products->contains($product_id))
@@ -82,10 +156,11 @@ class BasketController extends Controller
                     $pivotRow->count--;
                     $pivotRow->update();
                 }
-
         }
 
+        $product = Product::find($product_id);
 
+        session()->flash('error', 'Ты убрал ' . $product->name . ' (шт.)' );
 
         //используется редирект чтобы при обновлении стр. не добавлялось доп поле
         return redirect()->route('basket');
