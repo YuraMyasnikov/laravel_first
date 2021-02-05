@@ -7,6 +7,9 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\BasketController;
+use App\Http\Controllers\RegistrationUserController;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\LoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +21,43 @@ use App\Http\Controllers\BasketController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+    Route::name('user.')->group(function()
+    {
+
+        Route::view('/private', 'private')->middleware('auth')->name('private');
+
+        Route::get('/login', function()
+        {
+            //если уже вошел то будет редирект
+            if(Auth::check())
+            {
+                return redirect()->route('user.private');
+            }
+
+            return view('login');
+
+        })->name('login');
+        Route::post('/login', [LoginController::class, 'enter'])->name('enter');
+
+        Route::get('/registration', function()
+        {
+            if(Auth::check())
+            {
+                return redirect()->route('user.private');
+            }
+            return view('registration');
+
+        })->name('registration');
+        Route::post('/registration', [RegistrationUserController::class, 'save'])->name('register');
+
+        Route::get('/logout', function ()
+        {
+            Auth::logout();
+            return redirect()->route('home');
+        })->name('logout');
+
+    });
+
 
     Route::get('/', [HomeController::class, 'home'])->name('home');
     Route::get('/categories', [CategoryController::class, 'categories'])->name('categories');

@@ -40,7 +40,7 @@
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="http://internet-shop.tmweb.ru/login">Войти</a></li>
+                <li><a href="{{ route('user.login') }}">Войти</a></li>
 
             </ul>
         </div>
