@@ -535,6 +535,8 @@ class ComposerStaticInit50702f19db775ec70bb17635f8a48991
         'App\\Http\\Controllers\\RegistrationUserController' => __DIR__ . '/../..' . '/app/Http/Controllers/RegistrationUserController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
+        'App\\Http\\Middleware\\CheckIsAdmin' => __DIR__ . '/../..' . '/app/Http/Middleware/CheckIsAdmin.php',
+        'App\\Http\\Middleware\\EmptyBasket' => __DIR__ . '/../..' . '/app/Http/Middleware/EmptyBasket.php',
         'App\\Http\\Middleware\\EncryptCookies' => __DIR__ . '/../..' . '/app/Http/Middleware/EncryptCookies.php',
         'App\\Http\\Middleware\\NewTest' => __DIR__ . '/../..' . '/app/Http/Middleware/NewTest.php',
         'App\\Http\\Middleware\\PreventRequestsDuringMaintenance' => __DIR__ . '/../..' . '/app/Http/Middleware/PreventRequestsDuringMaintenance.php',

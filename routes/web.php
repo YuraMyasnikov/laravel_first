@@ -10,7 +10,7 @@ use App\Http\Controllers\BasketController;
 use App\Http\Controllers\RegistrationUserController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\LoginController;
-use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AuthController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,8 +24,10 @@ use App\Http\Controllers\AdminController;
     Route::name('user.')->group(function()
     {
 
-        Route::get('/private', [AdminController::class , 'orders'])->middleware(['auth', 'adminchik'])->name
+        Route::get('/private', [AuthController::class , 'admin'])->middleware(['auth', 'adminchik'])->name
         ('private');
+        Route::get('/cabinet', [AuthController::class , 'auth'])->middleware(['auth'])->name
+        ('cabinet');
 
         Route::get('/login', function()
         {

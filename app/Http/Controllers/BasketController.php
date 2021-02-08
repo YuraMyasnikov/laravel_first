@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Collection;
 
 use App\Models\Order;
 use App\Models\Product;
+use Illuminate\Support\Facades\Auth;
 
 class BasketController extends Controller
 {
@@ -25,6 +26,7 @@ class BasketController extends Controller
         {
             $order = Order::findOrFail($order_id);
         }
+
         return view('basket', compact('order'));
     }
 
@@ -71,6 +73,12 @@ class BasketController extends Controller
         }
         else{
             session()->flash('error', 'Какая то хуйня, попробуй повторить заказ');
+        }
+
+        if(Auth::check())
+        {
+            $order->user_id = Auth::id();
+            $order->save();
         }
 
         return redirect()->route('home');

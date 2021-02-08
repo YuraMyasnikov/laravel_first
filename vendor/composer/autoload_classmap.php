@@ -17,6 +17,8 @@ return array(
     'App\\Http\\Controllers\\RegistrationUserController' => $baseDir . '/app/Http/Controllers/RegistrationUserController.php',
     'App\\Http\\Kernel' => $baseDir . '/app/Http/Kernel.php',
     'App\\Http\\Middleware\\Authenticate' => $baseDir . '/app/Http/Middleware/Authenticate.php',
+    'App\\Http\\Middleware\\CheckIsAdmin' => $baseDir . '/app/Http/Middleware/CheckIsAdmin.php',
+    'App\\Http\\Middleware\\EmptyBasket' => $baseDir . '/app/Http/Middleware/EmptyBasket.php',
     'App\\Http\\Middleware\\EncryptCookies' => $baseDir . '/app/Http/Middleware/EncryptCookies.php',
     'App\\Http\\Middleware\\NewTest' => $baseDir . '/app/Http/Middleware/NewTest.php',
     'App\\Http\\Middleware\\PreventRequestsDuringMaintenance' => $baseDir . '/app/Http/Middleware/PreventRequestsDuringMaintenance.php',
