@@ -10,7 +10,7 @@ use App\Http\Controllers\BasketController;
 use App\Http\Controllers\RegistrationUserController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\LoginController;
-
+use App\Http\Controllers\AdminController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,14 +24,15 @@ use App\Http\Controllers\LoginController;
     Route::name('user.')->group(function()
     {
 
-        Route::view('/private', 'private')->middleware('auth')->name('private');
+        Route::get('/private', [AdminController::class , 'orders'])->middleware('auth')->name('private');
 
         Route::get('/login', function()
         {
             //если уже вошел то будет редирект
             if(Auth::check())
             {
-                return redirect()->route('user.private');
+                $orders = \App\Models\Order::get();
+                return redirect( route('user.private'),compact('orders') );
             }
 
             return view('login');
@@ -55,6 +56,12 @@ use App\Http\Controllers\LoginController;
             Auth::logout();
             return redirect()->route('home');
         })->name('logout');
+
+        Route::post('/logout', function ()
+        {
+            Auth::logout();
+            return redirect()->route('home');
+        })->name('out');
 
     });
 

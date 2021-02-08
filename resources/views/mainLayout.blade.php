@@ -40,8 +40,13 @@
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="{{ route('user.login') }}">Войти</a></li>
-
+                @guest()
+                    <li><a href="{{ route('user.login') }}">Войти</a></li>
+                @endguest
+                @auth()
+                    <li><a href="{{ route('user.private') }}">Closed page</a></li>
+                    <li><a href="{{ route('user.logout') }}">Выйти</a></li>
+                @endauth
             </ul>
         </div>
     </div>

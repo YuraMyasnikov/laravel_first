@@ -1,11 +1,49 @@
-@extends('mainLayout')
+@extends('authBasketLayout')
 
-@section('title', 'Закрытая страница')
+@section('title', 'Заказы')
 
 @section('content')
-    <h1>Закрытая страница</h1>
+    <div class="col-md-12">
+        <h1>Заказы</h1>
+        <table class="table">
+            <tbody>
+            <tr>
+                <th>
+                    #
+                </th>
+                <th>
+                    Имя
+                </th>
+                <th>
+                    Телефон
+                </th>
+                <th>
+                    Когда отправлен
+                </th>
+                <th>
+                    Сумма
+                </th>
+                <th>
+                    Действия
+                </th>
+            </tr>
+                @foreach($orders as $order)
+                    <tr>
+                        <td>{{ $order->id }}</td>
+                        <td>{{ $order->name }}</td>
+                        <td>{{ $order->phone }}</td>
+                        <td>{{ $order->created_at->format('H:i:S d/m/Y') }}</td>
+                        <td>{{ $order->getFullPrice() }} руб.</td>
+                        <td>
+                            <div class="btn-group" role="group">
+                                <a class="btn btn-success" type="button"
+                                   href="http://laravel-diplom-1.rdavydov.ru/admin/orders/1">Открыть</a>
+                            </div>
+                        </td>
+                    </tr>
+                    @endforeach
 
-    <p>Пользователь: </p>
-
-    <a href="{{ route('user.logout') }}" class="btn btn-warning">Разлогинуться</a>
+            </tbody>
+        </table>
+    </div>
 @endsection
