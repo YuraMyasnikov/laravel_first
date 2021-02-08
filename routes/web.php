@@ -24,7 +24,8 @@ use App\Http\Controllers\AdminController;
     Route::name('user.')->group(function()
     {
 
-        Route::get('/private', [AdminController::class , 'orders'])->middleware('auth')->name('private');
+        Route::get('/private', [AdminController::class , 'orders'])->middleware(['auth', 'adminchik'])->name
+        ('private');
 
         Route::get('/login', function()
         {

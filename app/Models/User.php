@@ -49,4 +49,9 @@ class User extends Authenticatable
         $this->attributes['password'] = Hash::make($password);
     }
 
+    public function admin_success() {
+
+        return $this->is_admin === 1;
+    }
+
 }
