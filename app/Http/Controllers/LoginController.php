@@ -19,15 +19,17 @@ class LoginController extends Controller
             return redirect()->intended()->route('user.private');
         }
 
-        $formFields = $request->only(['email','remember_token']);
+        $formFields = $request->only(['email','password']);
 
         // attempt попытка аутэентификации
         if(Auth::attempt($formFields))
         {
+            $user = Auth::user();
+            view('private', compact('user'));
             return redirect()->intended(route('user.private'));
         }
 
-        return redirect()->route('user.login')->withErrors(['email' => 'какая то хуйня']);
+        return redirect()->route('user.login')->withErrors(['email' => 'Возможно такоей e-mail не зарегистрирован', 'password' => 'Возможно не верно введен пароль']);
 
     }
 }

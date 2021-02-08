@@ -20,7 +20,7 @@ class RegistrationUserController extends Controller
             'email' => 'required|email',
             'password' => 'required|min:5'
         ]);
-
+        // Проверка на уникальность                  (существует)
         if(User::where('email', $myValid['email'])->exists())
         {
             return redirect()->route('user.registration')->withErrors([
@@ -32,6 +32,7 @@ class RegistrationUserController extends Controller
         $user = User::create($myValid);
         if ($user)
         {
+
             Auth::login($user);
             return redirect()->route('user.private')->withErrors([
                 'formError' => 'Какая то хуйня при регистрации пользователя'
@@ -40,4 +41,5 @@ class RegistrationUserController extends Controller
 
         return redirect()->route('user.login')->withErrors(['email' => 'какая то хуйня']);
     }
+
 }
