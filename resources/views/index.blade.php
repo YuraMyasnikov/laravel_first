@@ -1,4 +1,4 @@
-@extends('mainLayout')
+@extends('Layouts.mainLayout')
 
 @section('title','Главная страница')
 

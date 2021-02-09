@@ -33,6 +33,7 @@ class RegistrationUserController extends Controller
         if ($user)
         {
 
+
             Auth::login($user);
             return redirect()->route('user.private')->withErrors([
                 'formError' => 'Какая то хуйня при регистрации пользователя'

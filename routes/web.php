@@ -11,6 +11,7 @@ use App\Http\Controllers\RegistrationUserController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\AdminCategoriesController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,11 +22,14 @@ use App\Http\Controllers\AuthController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+
     Route::name('user.')->group(function()
     {
 
         Route::get('/private', [AuthController::class , 'admin'])->middleware(['auth', 'adminchik'])->name
         ('private');
+
         Route::get('/cabinet', [AuthController::class , 'auth'])->middleware(['auth'])->name
         ('cabinet');
 
@@ -38,7 +42,7 @@ use App\Http\Controllers\AuthController;
                 return redirect( route('user.private'),compact('orders') );
             }
 
-            return view('login');
+            return view('Registration/login');
 
         })->name('login');
         Route::post('/login', [LoginController::class, 'enter'])->name('enter');
@@ -49,7 +53,7 @@ use App\Http\Controllers\AuthController;
             {
                 return redirect()->route('user.private');
             }
-            return view('registration');
+            return view('Registration/registration');
 
         })->name('registration');
         Route::post('/registration', [RegistrationUserController::class, 'save'])->name('register');
@@ -69,23 +73,33 @@ use App\Http\Controllers\AuthController;
     });
 
 
+    Route::resource('adminCategories', AdminCategoriesController::class);
+
+
     Route::get('/', [HomeController::class, 'home'])->name('home');
     Route::get('/categories', [CategoryController::class, 'categories'])->name('categories');
 
+    /**
+     * Корзина
+     */
+    Route::group(['prefix' => 'basket'],function(){
 
+        Route::middleware('empty_basket')->group(function()
+        {
+            Route::get('/', [BasketController::class, 'basket'])->name('basket');
+            Route::get('/order', [BasketController::class, 'basketPlace'])->name('basketPlace');
+            Route::post('/del/{product_id}', [BasketController::class, 'basketDel'])->name('basketDel');
+            Route::post('/order', [BasketController::class, 'basketConfirm'])->name('basketConfirm');
+        });
 
-    Route::middleware('empty_basket')->group(function()
-    {
-        Route::get('/basket', [BasketController::class, 'basket'])->name('basket');
-        Route::get('/basket/order', [BasketController::class, 'basketPlace'])->name('basketPlace');
-        Route::post('/basket/del/{product_id}', [BasketController::class, 'basketDel'])->name('basketDel');
-        Route::post('/basket/order', [BasketController::class, 'basketConfirm'])->name('basketConfirm');
+        Route::post('/add/{product_id}', [BasketController::class, 'basketAdd'])->name('basketAdd');
 
     });
-    Route::post('/basket/add/{product_id}', [BasketController::class, 'basketAdd'])->name('basketAdd');
+
 
 
     Route::get('/{category}', [CategoryController::class, 'category'])->name('category');
     Route::get('/{category}/{product}', [CategoryController::class, 'product'])->name('product');
+
 
 

@@ -25,7 +25,7 @@ class LoginController extends Controller
         if(Auth::attempt($formFields))
         {
             $user = Auth::user();
-            view('private', compact('user'));
+            view('Admin/private', compact('user'));
             return redirect()->intended(route('user.private'));
         }
 

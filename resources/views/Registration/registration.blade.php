@@ -1,4 +1,4 @@
-@extends('registerLayout')
+@extends('Layouts.registerLayout')
 
 @section('title', 'Регистрация')
 

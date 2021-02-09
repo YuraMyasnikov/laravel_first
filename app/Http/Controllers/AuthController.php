@@ -13,13 +13,13 @@ class AuthController extends Controller
     {
         $orders = Order::get();
 
-        return view('private', compact('orders'));
+        return view('Admin/private', compact('orders'));
     }
 
     public function auth(){
 
         $order = Order::where('user_id',Auth::id())->first();
 
-        return view('cabinet', compact('order'));
+        return view('Auth/cabinet', compact('order'));
     }
 }

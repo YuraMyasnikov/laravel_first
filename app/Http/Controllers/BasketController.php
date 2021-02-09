@@ -27,7 +27,7 @@ class BasketController extends Controller
             $order = Order::findOrFail($order_id);
         }
 
-        return view('basket', compact('order'));
+        return view('Basket/basket', compact('order'));
     }
 
 
@@ -50,7 +50,7 @@ class BasketController extends Controller
         //Узнаю поле заявки на выбраные товары
         $order = Order::find($order_id);
 
-        return view('basketPlace', compact('order'));
+        return view('Basket/basketPlace', compact('order'));
     }
 
     //Подтверждение заказа
