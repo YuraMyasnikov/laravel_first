@@ -14,7 +14,7 @@ class AlterUser extends Migration
     public function up()
     {
         Schema::table('orders', function (Blueprint $table){
-            $table->integer('user_id')->default(0);
+            $table->integer('user_id')->default(0 );
         });
     }
 

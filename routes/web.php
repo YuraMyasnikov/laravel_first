@@ -73,11 +73,16 @@ use App\Http\Controllers\AuthController;
     Route::get('/categories', [CategoryController::class, 'categories'])->name('categories');
 
 
-    Route::get('/basket', [BasketController::class, 'basket'])->name('basket');
-    Route::get('/basket/order', [BasketController::class, 'basketPlace'])->name('basketPlace');
+
+    Route::middleware('empty_basket')->group(function()
+    {
+        Route::get('/basket', [BasketController::class, 'basket'])->name('basket');
+        Route::get('/basket/order', [BasketController::class, 'basketPlace'])->name('basketPlace');
+        Route::post('/basket/del/{product_id}', [BasketController::class, 'basketDel'])->name('basketDel');
+        Route::post('/basket/order', [BasketController::class, 'basketConfirm'])->name('basketConfirm');
+
+    });
     Route::post('/basket/add/{product_id}', [BasketController::class, 'basketAdd'])->name('basketAdd');
-    Route::post('/basket/del/{product_id}', [BasketController::class, 'basketDel'])->name('basketDel');
-    Route::post('/basket/order', [BasketController::class, 'basketConfirm'])->name('basketConfirm');
 
 
     Route::get('/{category}', [CategoryController::class, 'category'])->name('category');
