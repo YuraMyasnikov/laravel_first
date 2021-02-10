@@ -28,19 +28,24 @@
                     <td>{{ $category->code }}</td>
                     <td>{{ $category->name }}</td>
                     <td>
-                        <a class="btn btn-success" type="button"
-                           href="{{ route('adminCategories.show', $category ) }}"> Открыть </a>
-
-                        <a class="btn btn-warning" type="button"
-                            href="{{ route('adminCategories.edit', [$category] ) }}"> Редактировать </a>
-
+                        <div class="btn-group" role="group">
+                            <form action="{{ route('categories.destroy', $category) }}" method="POST">
+                                <a class="btn btn-success" type="button" href="{{ route('categories.show', $category)
+                                }}">Открыть</a>
+                                <a class="btn btn-warning" type="button" href="{{ route('categories.edit', $category)
+                                }}">Редактировать</a>
+                                @csrf
+                                @method('DELETE')
+                                <input class="btn btn-danger" type="submit" value="Удалить">
+                            </form>
+                        </div>
                     </td>
                 </tr>
             @endforeach
 
             </tbody>
         </table>
-        <a href="{{ route('adminCategories.create') }}" class="btn btn-success">Добавить Категорию</a>
+        <a href="{{ route('categories.create') }}" class="btn btn-success">Добавить Категорию</a>
     </div>
 @endsection
 

@@ -6,7 +6,7 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
-class AdminCategoriesController extends Controller
+class AdminCategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +16,7 @@ class AdminCategoriesController extends Controller
     public function index()
     {
         $categories = Category::get();
-        return view('Admin/categories',compact('categories'));
+        return view('admin/categories/categories', compact('categories'));
     }
 
     /**
@@ -26,7 +26,7 @@ class AdminCategoriesController extends Controller
      */
     public function create()
     {
-        return view('Admin/categoryCreate');
+        return view('admin/categories/categoryCreate');
     }
 
     /**
@@ -37,8 +37,8 @@ class AdminCategoriesController extends Controller
      */
     public function store(Request $request)
     {
-        $category = Category::create($request->all());
-        return redirect(route('adminCategories.index'));
+        Category::create($request->all());
+        return redirect(route('categories.index'));
     }
 
     /**
@@ -49,7 +49,7 @@ class AdminCategoriesController extends Controller
      */
     public function show(Category $category)
     {
-        return view('Admin/categoryShow',compact('category'));
+        return view('admin/categories/categoryShow', compact('category'));
     }
 
     /**
@@ -60,7 +60,7 @@ class AdminCategoriesController extends Controller
      */
     public function edit(Category $category)
     {
-        return 'edit';
+        return view('admin/categories/categoryCreate', compact('category'));
     }
 
     /**
@@ -72,7 +72,8 @@ class AdminCategoriesController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        return 'update';
+        $category->update($request->all());
+        return redirect(route('categories.index'));
     }
 
     /**
@@ -83,6 +84,7 @@ class AdminCategoriesController extends Controller
      */
     public function destroy(Category $category)
     {
-        return 'destroy';
+        $category->delete();
+        return redirect(route('categories.index'));
     }
 }

@@ -1,21 +1,39 @@
 @extends('Layouts.authBasketLayout')
 
-@section('title', 'Создать категорию')
+@isset($category)
+    @section('title', 'Редактирование ' . $category->name)
+@else
+    @section('title', 'Создать категорию')
+@endisset
+
 
 @section('content')
     <div class="col-md-12">
 
-        <h1>Добавить Категорию</h1>
+        @isset($category)
+        <h1>Редактирование категории <b>{{ $category->name }}</b></h1>
+        @else
+            <h1>Добавить Категорию</h1>
+        @endisset
 
         <form method="POST" enctype="multipart/form-data"
-              action="{{ route('adminCategories.store') }}">
+              action="
+                    @isset($category)
+                        {{ route('categories.update', $category) }}
+                    @else
+                        {{ route('categories.store') }}
+                    @endisset
+                  ">
             <div>
+                @isset($category)
+                    @method('PUT')
+                @endisset
                 @csrf
                 <div class="input-group row">
                     <label for="code" class="col-sm-2 col-form-label">Код: </label>
                     <div class="col-sm-6">
                         <input type="text" class="form-control" name="code" id="code"
-                               value="">
+                               value="@isset($category) {{ $category->code }} @endisset">
                     </div>
                 </div>
                 <br>
@@ -23,7 +41,7 @@
                     <label for="name" class="col-sm-2 col-form-label">Название: </label>
                     <div class="col-sm-6">
                         <input type="text" class="form-control" name="name" id="name"
-                               value="">
+                               value="@isset($category) {{ $category->name }} @endisset">
                     </div>
                 </div>
 
@@ -32,7 +50,7 @@
                     <label for="description" class="col-sm-2 col-form-label">Описание: </label>
                     <div class="col-sm-6">
                         <textarea name="description" id="description" cols="72"
-                                  rows="7"></textarea>
+                                  rows="7">@isset($category) {{ $category->description }} @endisset</textarea>
                     </div>
                 </div>
                 <br>

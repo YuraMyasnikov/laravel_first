@@ -11,7 +11,8 @@ use App\Http\Controllers\RegistrationUserController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\AdminCategoriesController;
+use App\Http\Controllers\AdminCategoryController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -72,9 +73,9 @@ use App\Http\Controllers\AdminCategoriesController;
 
     });
 
-
-    Route::resource('adminCategories', AdminCategoriesController::class);
-
+    Route::group(['middleware' => 'auth', 'prefix' => 'admin'],function(){
+        Route::resource('admin/categories', AdminCategoryController::class);
+    });
 
     Route::get('/', [HomeController::class, 'home'])->name('home');
     Route::get('/categories', [CategoryController::class, 'categories'])->name('categories');

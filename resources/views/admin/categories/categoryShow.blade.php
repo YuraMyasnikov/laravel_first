@@ -3,7 +3,6 @@
 @section('title', 'Категория ' . $category->name)
 
 @section('content')
-    {{$category}}
     <div class="col-md-12">
         <h1>Категория {{ $category->name }}</h1>
         <table class="table">
