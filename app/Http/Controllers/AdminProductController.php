@@ -6,6 +6,7 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use App\Models\Category;
+use Illuminate\Support\Facades\Storage;
 
 class AdminProductController extends Controller
 {
@@ -27,6 +28,8 @@ class AdminProductController extends Controller
      */
     public function create()
     {
+
+
         $categories = Category::get();
         return view('admin/products/productCreate',compact('categories'));
     }
@@ -39,7 +42,11 @@ class AdminProductController extends Controller
      */
     public function store(Request $request)
     {
-        Product::create($request->all());
+        $path = $request->file('image')->store('product');
+        $params = $request->all();
+        $params['image'] = $path;
+
+        Product::create($params);
         return redirect(route('products.index'));
     }
 
@@ -81,7 +88,12 @@ class AdminProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        $product->update($request->all());
+        Storage::delete($product->image);
+        $path = $request->file('image')->store('product');
+        $params = $request->all();
+        $params['image'] = $path;
+
+        $product->update($params);
         return redirect(route('products.index'));
     }
 

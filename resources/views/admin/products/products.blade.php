@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="col-md-12">
-        <div style="display: flex"><h1>Категории</h1>{{$products->count()}}</div>
+        <div style="display: flex"><h1>Товары</h1>{{$products->count()}}</div>
         <table class="table">
             <tbody>
             <tr>

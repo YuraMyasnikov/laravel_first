@@ -2,7 +2,7 @@
     <div class="thumbnail">
         <div class="labels">
         </div>
-        <img src="http://internet-shop.tmweb.ru/storage/products/htc_one_s.png" alt="">
+        <img src="{{ Storage::url($product->image) }}">
         <div class="caption">
             <h4>{{ $product->name }}</h4>
             <p>{{ $product->category->name }}</p>
