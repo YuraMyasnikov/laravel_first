@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use App\Http\Requests\AdminCategoriesRequest;
+
 
 class AdminCategoryController extends Controller
 {
@@ -35,7 +37,7 @@ class AdminCategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AdminCategoriesRequest $request)
     {
         Category::create($request->all());
         return redirect(route('categories.index'));
@@ -70,7 +72,7 @@ class AdminCategoryController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category)
+    public function update(AdminCategoriesRequest $request, Category $category)
     {
         $category->update($request->all());
         return redirect(route('categories.index'));

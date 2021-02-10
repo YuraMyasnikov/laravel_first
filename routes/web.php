@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminCategoryController;
+use App\Http\Controllers\AdminProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -75,6 +76,7 @@ use App\Http\Controllers\AdminCategoryController;
 
     Route::group(['middleware' => 'auth', 'prefix' => 'admin'],function(){
         Route::resource('admin/categories', AdminCategoryController::class);
+        Route::resource('admin/products', AdminProductController::class);
     });
 
     Route::get('/', [HomeController::class, 'home'])->name('home');
