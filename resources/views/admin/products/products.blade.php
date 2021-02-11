@@ -45,7 +45,7 @@
 
             </tbody>
         </table>
-        <a href="{{ route('products.create') }}" class="btn btn-success">Добавить Категорию</a>
+        <a href="{{ route('products.create') }}" class="btn btn-success">Добавить товар</a>
     </div>
 @endsection
 

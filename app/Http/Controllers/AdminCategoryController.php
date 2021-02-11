@@ -40,9 +40,14 @@ class AdminCategoryController extends Controller
      */
     public function store(AdminCategoriesRequest $request)
     {
-        $path = $request->file('image')->store('category');
+
         $params = $request->all();
-        $params['image'] = $path;
+        unset($params['image']);
+        if($request->has('image'))
+        {
+            $path = $request->file('image')->store('product');
+            $params['image'] = $path;
+        }
 
         Category::create($params);
         return redirect(route('categories.index'));
@@ -79,11 +84,14 @@ class AdminCategoryController extends Controller
      */
     public function update(AdminCategoriesRequest $request, Category $category)
     {
-        Storage::delete($category->image);
-        $path = $request->file('image')->store('category');
         $params = $request->all();
-        $params['image'] = $path;
-
+        unset($params['image']);
+        if($request->has('image'))
+        {
+            Storage::delete($category->image);
+            $path = $request->file('image')->store('category');
+            $params['image'] = $path;
+        }
         $category->update($params);
         return redirect(route('categories.index'));
     }

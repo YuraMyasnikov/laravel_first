@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use App\Models\Category;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\AdminProductsRequest;
 
 class AdminProductController extends Controller
 {
@@ -29,7 +30,6 @@ class AdminProductController extends Controller
     public function create()
     {
 
-
         $categories = Category::get();
         return view('admin/products/productCreate',compact('categories'));
     }
@@ -40,11 +40,15 @@ class AdminProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AdminProductsRequest $request)
     {
-        $path = $request->file('image')->store('product');
         $params = $request->all();
-        $params['image'] = $path;
+        unset($params['image']);
+        if($request->has('image'))
+        {
+            $path = $request->file('image')->store('product');
+            $params['image'] = $path;
+        }
 
         Product::create($params);
         return redirect(route('products.index'));
@@ -86,12 +90,16 @@ class AdminProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(AdminProductsRequest $request, Product $product)
     {
-        Storage::delete($product->image);
-        $path = $request->file('image')->store('product');
         $params = $request->all();
-        $params['image'] = $path;
+        unset($params['image']);
+        if($request->has('image'))
+        {
+            Storage::delete($product->image);
+            $path = $request->file('image')->store('product');
+            $params['image'] = $path;
+        }
 
         $product->update($params);
         return redirect(route('products.index'));
