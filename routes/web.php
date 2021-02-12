@@ -32,6 +32,9 @@ use App\Http\Controllers\AdminProductController;
         Route::get('/private', [AuthController::class , 'admin'])->middleware(['auth', 'adminchik'])->name
         ('private');
 
+        Route::get('/show/{order?}', [AuthController::class , 'show'])->middleware(['auth',])->name
+        ('show');
+
         Route::get('/cabinet', [AuthController::class , 'auth'])->middleware(['auth'])->name
         ('cabinet');
 
@@ -77,6 +80,7 @@ use App\Http\Controllers\AdminProductController;
     Route::group(['middleware' => 'auth', 'prefix' => 'admin'],function(){
         Route::resource('admin/categories', AdminCategoryController::class);
         Route::resource('admin/products', AdminProductController::class);
+        Route::get('admin/order', [AuthController::class, 'show'])->name('show');
     });
 
     Route::get('/', [HomeController::class, 'home'])->name('home');
@@ -103,6 +107,7 @@ use App\Http\Controllers\AdminProductController;
 
     Route::get('/{category}', [CategoryController::class, 'category'])->name('category');
     Route::get('/{category}/{product}', [CategoryController::class, 'product'])->name('product');
+
 
 
 

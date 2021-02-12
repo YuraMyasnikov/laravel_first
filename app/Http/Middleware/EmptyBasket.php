@@ -20,7 +20,7 @@ class EmptyBasket
 
         $order_id = session('order_id');
 
-        if(! is_null($order_id) )
+        if(!is_null($order_id) )
         {
            $order = Order::findOrFail($order_id);
            if($order->products->count() == 0)
@@ -28,7 +28,13 @@ class EmptyBasket
                session()->flash('error', 'Корзина пуста');
                return redirect()->route('home');
            }
-        };
+        }
+        else{
+            session()->flash('error', 'Корзина пуста');
+            return back();
+        }
+
+
 
         return $next($request);
     }

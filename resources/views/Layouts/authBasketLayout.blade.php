@@ -31,7 +31,7 @@
                 <ul class="nav navbar-nav">
                     <li><a href="{{ route('categories.index') }}">Категории</a></li>
                     <li><a href="{{ route('products.index') }}">Товары</a></li>
-                    <li><a href="http://laravel-diplom-1.rdavydov.ru/admin/orders">Заказы</a></li>
+                    <li><a href="{{ route('user.private') }}">Заказы</a></li>
                 </ul>
 
                 @guest
