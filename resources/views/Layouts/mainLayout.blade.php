@@ -43,9 +43,13 @@
                     <li><a href="{{ route('user.login') }}">Войти</a></li>
                 @endguest
                 @auth()
-                    <li><a href="{{ route('user.cabinet') }}">Личный кабинет</a></li>
-                    <li><a href="{{ route('user.private') }}">Админ</a></li>
-                    <li><a href="{{ route('user.logout') }}">Выйти</a></li>
+                    @if(Auth::user()->is_admin)
+                        <li><a href="{{ route('user.private') }}">Админ</a></li>
+                        <li><a href="{{ route('user.logout') }}">Выйти</a></li>
+                    @else
+                        <li><a href="{{ route('user.cabinet') }}">Личный кабинет</a></li>
+                        <li><a href="{{ route('user.logout') }}">Выйти</a></li>
+                    @endif
                 @endauth
             </ul>
         </div>
