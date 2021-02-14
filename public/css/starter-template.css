@@ -52,3 +52,10 @@ footer {
     color: #99979c;
     background-color: #2a2730;
 }
+
+.cardItemName{
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

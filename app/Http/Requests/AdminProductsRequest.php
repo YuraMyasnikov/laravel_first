@@ -24,7 +24,7 @@ class AdminProductsRequest extends FormRequest
     public function rules()
     {
         $rules = [
-            'code'          => 'required|min:3|max:30|unique:products,code',
+            'code'          => 'required|min:3|max:50|unique:products,code',
             'name'          => 'required|min:2|max:50',
             'price'         => 'required|numeric',
             'description'   => 'required|min:3',

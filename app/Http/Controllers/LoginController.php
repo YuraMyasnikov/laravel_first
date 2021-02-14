@@ -16,7 +16,7 @@ class LoginController extends Controller
 
         if (Auth::check())
         {
-            return redirect()->intended()->route('user.private');
+            return redirect()->intended(route('user.private'));
         }
 
         $formFields = $request->only(['email','password']);
