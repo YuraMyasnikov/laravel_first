@@ -13,6 +13,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminCategoryController;
 use App\Http\Controllers\AdminProductController;
+use App\Http\Controllers\ResetController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,87 +27,79 @@ use App\Http\Controllers\AdminProductController;
 */
 
 
-    Route::name('user.')->group(function()
-    {
+Route::name('user.')->group(function() {
 
-        Route::get('/private', [AuthController::class , 'admin'])->middleware(['auth', 'adminchik'])->name
-        ('private');
+    Route::get('/private', [AuthController::class, 'admin'])->middleware(['auth', 'adminchik'])->name
+    ('private');
 
-        Route::get('/show/{order?}', [AuthController::class , 'show'])->middleware(['auth',])->name
-        ('show');
+    Route::get('/show/{order?}', [AuthController::class, 'show'])->middleware(['auth',])->name
+    ('show');
 
-        Route::get('/cabinet', [AuthController::class , 'auth'])->middleware(['auth'])->name
-        ('cabinet');
+    Route::get('/cabinet', [AuthController::class, 'auth'])->middleware(['auth'])->name
+    ('cabinet');
 
-        Route::get('/login', function()
-        {
-            //если уже вошел то будет редирект
-            if(Auth::check())
-            {
-                $orders = \App\Models\Order::get();
-                return redirect( route('user.private'),compact('orders') );
-            }
+    Route::get('/login', function() {
+        //если уже вошел то будет редирект
+        if ( Auth::check() ) {
+            $orders = \App\Models\Order::get();
 
-            return view('Registration/login');
+            return redirect(route('user.private'), compact('orders'));
+        }
 
-        })->name('login');
-        Route::post('/login', [LoginController::class, 'enter'])->name('enter');
+        return view('Registration/login');
 
-        Route::get('/registration', function()
-        {
-            if(Auth::check())
-            {
-                return redirect()->route('user.private');
-            }
-            return view('Registration/registration');
+    })->name('login');
+    Route::post('/login', [LoginController::class, 'enter'])->name('enter');
 
-        })->name('registration');
-        Route::post('/registration', [RegistrationUserController::class, 'save'])->name('register');
+    Route::get('/registration', function() {
+        if ( Auth::check() ) {
+            return redirect()->route('user.private');
+        }
 
-        Route::get('/logout', function ()
-        {
-            Auth::logout();
-            return redirect()->route('home');
-        })->name('logout');
+        return view('Registration/registration');
 
-        Route::post('/logout', function ()
-        {
-            Auth::logout();
-            return redirect()->route('home');
-        })->name('out');
+    })->name('registration');
+    Route::post('/registration', [RegistrationUserController::class, 'save'])->name('register');
 
+    Route::get('/logout', function() {
+        Auth::logout();
+
+        return redirect()->route('home');
+    })->name('logout');
+
+    Route::post('/logout', function() {
+        Auth::logout();
+
+        return redirect()->route('home');
+    })->name('out');
+
+});
+
+Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function() {
+    Route::resource('admin/categories', AdminCategoryController::class);
+    Route::resource('admin/products', AdminProductController::class);
+    Route::get('admin/order', [AuthController::class, 'show'])->name('show');
+});
+
+Route::get('/', [HomeController::class, 'home'])->name('home');
+Route::get('/categories', [CategoryController::class, 'categories'])->name('categories');
+
+/**
+ * Корзина
+ */
+Route::group(['prefix' => 'basket'], function() {
+    Route::middleware('empty_basket')->group(function() {
+        Route::get('/', [BasketController::class, 'basket'])->name('basket');
+        Route::get('/order', [BasketController::class, 'basketPlace'])->name('basketPlace');
+        Route::post('/del/{product_id}', [BasketController::class, 'basketDel'])->name('basketDel');
+        Route::post('/order', [BasketController::class, 'basketConfirm'])->name('basketConfirm');
     });
+    Route::post('/add/{product_id}', [BasketController::class, 'basketAdd'])->name('basketAdd');
+});
 
-    Route::group(['middleware' => 'auth', 'prefix' => 'admin'],function(){
-        Route::resource('admin/categories', AdminCategoryController::class);
-        Route::resource('admin/products', AdminProductController::class);
-        Route::get('admin/order', [AuthController::class, 'show'])->name('show');
-    });
-
-    Route::get('/', [HomeController::class, 'home'])->name('home');
-    Route::get('/categories', [CategoryController::class, 'categories'])->name('categories');
-
-    /**
-     * Корзина
-     */
-    Route::group(['prefix' => 'basket'],function(){
-
-        Route::middleware('empty_basket')->group(function()
-        {
-            Route::get('/', [BasketController::class, 'basket'])->name('basket');
-            Route::get('/order', [BasketController::class, 'basketPlace'])->name('basketPlace');
-            Route::post('/del/{product_id}', [BasketController::class, 'basketDel'])->name('basketDel');
-            Route::post('/order', [BasketController::class, 'basketConfirm'])->name('basketConfirm');
-        });
-
-        Route::post('/add/{product_id}', [BasketController::class, 'basketAdd'])->name('basketAdd');
-
-    });
-
-
-
-    Route::get('/{category}', [CategoryController::class, 'category'])->name('category');
-    Route::get('/{category}/{product}', [CategoryController::class, 'product'])->name('product');
+Route::get('/reset', [ResetController::class, 'reset'])->name('reset');
+Route::get('/{category}', [CategoryController::class, 'category'])->name('category');
+Route::get('/{category}/{product}', [CategoryController::class, 'product'])->name('product');
 
 
 
