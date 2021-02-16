@@ -28,6 +28,15 @@
                                             <img height="56px" src="{{ Storage::url($product->image) }}">
                                             {{ $product->name }}
                                         </a>
+                                        @if($product->isNew())
+                                            <span class="alert alert-success">Новинка</span>
+                                        @endif
+                                        @if($product->isHit())
+                                            <span class="alert alert-warning">Хит</span>
+                                        @endif
+                                        @if($product->isSale())
+                                            <span class="alert alert-info">Скидка</span>
+                                        @endif
                                     </td>
                                     <td><span class="badge">{{ $product->pivot->count }} </span></td>
                                     <td>{{ $product->price }} </td>
