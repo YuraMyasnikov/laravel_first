@@ -1,6 +1,16 @@
 <div class="col-sm-6 col-md-4">
     <div class="thumbnail">
         <div class="labels">
+            @if($product->isNew())
+                <div style="min-width: 87px; margin-bottom: 5px !important;" class="alert alert-success">Новинка</div>
+            @endif
+            @if($product->isHit())
+                <div style="min-width: 87px; margin-bottom: 5px !important;" class="alert alert-warning">Хит</div>
+            @endif
+            @if($product->isSale())
+                <div style="min-width: 87px; margin-bottom: 5px !important;" class="alert alert-info">Скидка</div>
+            @endif
+
         </div>
         <img src="{{ Storage::url($product->image) }}">
         <div class="caption">

@@ -20,12 +20,14 @@ class CategoryTableSeeder extends Seeder
                 'code'=>'mobile',
                 'description'=>'В этом разделе вы найдёте самые популярные мобильные телефонамы по отличным ценам!',
                 'image'=>'category/mobile.jpg',
-            ],[
+            ],
+            [
                 'name'=>'Портативная техника',
                 'code'=>'portable',
                 'description'=>'Раздел с портативной техникой.',
                 'image'=>'category/portable.jpg',
-            ],[
+            ],
+            [
                 'name'=>'Бытовая техника',
                 'code'=>'technicks',
                 'description'=>'Раздел с бытовой техникой',

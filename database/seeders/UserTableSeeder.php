@@ -27,6 +27,7 @@ class  UserTableSeeder extends Seeder
                 'password' => bcrypt('user@mail.ru'),
                 'is_admin' => 0,
             ],
+
         ]);
     }
 }

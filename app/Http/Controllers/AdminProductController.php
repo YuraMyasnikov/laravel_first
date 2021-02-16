@@ -100,6 +100,16 @@ class AdminProductController extends Controller
             $path = $request->file('image')->store('product');
             $params['image'] = $path;
         }
+        foreach (['new','hit','sale'] as $name)
+        {
+          if ( isset( $params[$name]) && $params[$name] !== 1){
+              $params[$name] = 0;
+          }else{
+              $params[$name] = 1;
+          }
+
+        }
+
 
         $product->update($params);
         return redirect(route('products.index'));

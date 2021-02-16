@@ -109,6 +109,18 @@
                         @enderror
                     </div>
                 </div>
+
+                    @foreach(['new' => 'Новинка','hit' => 'Хит продаж','sale' => 'Скидка'] as $key => $value)
+                        <br>
+                        <div class="input-group row">
+                            <label for="{{ $key }}" class="col-sm-2 col-form-label">{{ $value }} </label>
+                            <div class="col-sm-6">
+                                <input type="checkbox" class="form-check" name="{{ $key }}" id="{{ $key }}"
+                                @if(isset($product) && $product[$key] === 1) checked="checked" @endif
+                                >
+                            </div>
+                        </div>
+                    @endforeach
                 <button class="btn btn-success" type="submit">Сохранить</button>
             </div>
         </form>

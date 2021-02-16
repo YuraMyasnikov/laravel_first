@@ -10,7 +10,7 @@ class Product extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['code', 'name', 'description', 'price', 'category_id', 'image'];
+    protected $fillable = ['code', 'name', 'description', 'price', 'category_id', 'image', 'new', 'hit', 'sale'];
 
     public function category()
     {
@@ -27,6 +27,37 @@ class Product extends Model
         {
             return $this->price;
         }
+    }
+
+
+    public function setNewAttribute($value)
+    {
+        $this->attributes['new'] = $value == 'on' ? $value=1 : $value=0;
+    }
+
+    public function setHitAttribute($value)
+    {
+        $res = $this->attributes['hit'] = $value == 'on' ? $value=1 : $value=0;
+    }
+
+    public function setSaleAttribute($value)
+    {
+        $res = $this->attributes['sale'] = $value == 'on' ? $value=1 : $value=0;
+    }
+
+    public function isNew()
+    {
+        return $this->new === 1;
+    }
+
+    public function isHit()
+    {
+        return $this->hit === 1;
+    }
+
+    public function isSale()
+    {
+        return $this->sale === 1;
     }
 
 }
