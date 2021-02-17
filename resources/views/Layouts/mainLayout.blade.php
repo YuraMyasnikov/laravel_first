@@ -9,10 +9,16 @@
     <title>@yield('title')</title>
 
     <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
+
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/bootstrap-theme.min.css" rel="stylesheet">
+    <link href="/css/starter-template.css" rel="stylesheet">
+    {{--<link href="/css/app.css" rel="stylesheet">--}}
+
     <script src="/js/jquery.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/css/starter-template.css" rel="stylesheet">
+   {{-- <script src="/js/app.js"></script>--}}
+    <script src="/js/myjq.js"></script>
 </head>
 <body>
 <nav class="navbar navbar-inverse navbar-fixed-top">
