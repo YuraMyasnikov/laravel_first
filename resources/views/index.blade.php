@@ -4,15 +4,27 @@
 
 @section('content')
     <h1>Все товары</h1>
+    <div class="row"  style="margin: 30px 0;">
+        <div class="col">
+            @error('price_from')
+            <span class="alert alert-danger"> {{ $message }}</span>
+            @enderror
+            @error('price_to')
+            <span class="alert alert-danger"> {{ $message }}</span>
+            @enderror
+        </div>
+    </div>
     <form method="GET" action="{{ route('home') }}">
         <div class="filters row">
             <div class="col-sm-6 col-md-3">
                 <label for="price_from">Цена от
                     <input type="text" name="price_from" id="price_from" size="6" value="{{ $request->price_from }}">
                 </label>
+
                 <label for="price_to">до
                     <input type="text" name="price_to" id="price_to" size="6"  value="{{ $request->price_to }}">
                 </label>
+
             </div>
             @foreach(['new'=>'Новинка','hit'=>'Хит','sale'=>'Скидка'] as $fieldCheck => $fieldValue)
                 <div class="col-sm-2 col-md-2">

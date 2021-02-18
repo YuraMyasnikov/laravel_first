@@ -10,7 +10,6 @@
             @if($product->isSale())
                 <div style="min-width: 87px; margin-bottom: 5px !important;" class="alert alert-info">Скидка</div>
             @endif
-
         </div>
         <img src="{{ Storage::url($product->image) }}">
         <div class="caption">

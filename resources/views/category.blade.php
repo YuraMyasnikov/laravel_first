@@ -37,7 +37,7 @@
         </div>
     </form>--}}
 
-    @foreach($category->products as $product)
+    @foreach($category->products()->with('category')->get() as $product)
         @include('cardItem',compact($product))
     @endforeach
     {{--<nav>

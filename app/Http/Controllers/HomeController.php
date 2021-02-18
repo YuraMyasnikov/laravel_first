@@ -3,6 +3,7 @@
 
     namespace App\Http\Controllers;
 
+    use App\Http\Requests\ProductFilterRequest;
     use Illuminate\Http\Request;
     use Illuminate\Routing\Controller;
 
@@ -10,10 +11,11 @@
 
     class HomeController extends Controller
     {
-        public function home (Request $request)
+        public function home (ProductFilterRequest $request)
         {
 
-            $productsQuery = Product::query();
+            $productsQuery = Product::with('category');
+
             if($request->price_from)
             {
                 $productsQuery->where('price', '>=', $request->price_from);

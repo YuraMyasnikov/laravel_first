@@ -29,7 +29,14 @@ class Product extends Model
         }
     }
 
+    //scope
+    public function scopeCategory($cat)
+    {
+        return $cat->with('category')->name;
+    }
+    //<<scope
 
+    //мутаторы
     public function setNewAttribute($value)
     {
         $this->attributes['new'] = $value == 'on' ? $value=1 : $value=0;
@@ -44,6 +51,7 @@ class Product extends Model
     {
         $res = $this->attributes['sale'] = $value == 'on' ? $value=1 : $value=0;
     }
+    //<<мутаторы
 
     public function isNew()
     {
