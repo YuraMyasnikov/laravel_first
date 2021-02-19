@@ -11,7 +11,7 @@
     <div class="col-md-12">
 
         @isset($product)
-        <h1>Редактирование товара <b>{{ $product->name }}</b></h1>
+            <h1>Редактирование товара <b>{{ $product->name }}</b></h1>
         @else
             <h1>Создать товар</h1>
         @endisset
@@ -19,23 +19,32 @@
         <form method="POST" enctype="multipart/form-data"
               action="
                     @isset($product)
-                        {{ route('products.update', $product) }}
-                    @else
-                        {{ route('products.store') }}
-                    @endisset
+              {{ route('products.update', $product) }}
+              @else
+              {{ route('products.store') }}
+              @endisset
                   ">
             <div>
                 @isset($product)
                     @method('PUT')
                 @endisset
                 @csrf
+                <br>
+                <div class="input-group row">
+                    <label for="show" class="col-sm-2 col-form-label">Показать на сайте </label>
+                    <div class="col-sm-6">
+                        <input type="checkbox" class="form-check" name="show" id="show"
+                               @if(isset($product) && $product->show !== 0) checked="checked" @endif
+                        >
+                    </div>
+                </div>
                 <div class="input-group row">
                     <label for="code" class="col-sm-2 col-form-label">Код: </label>
                     <div class="col-sm-6">
                         <input type="text" class="form-control" name="code" id="code"
                                value="{{ old('code', isset($product) ? $product->code : null ) }}">
                         @error('code')
-                            <div class="alert alert-danger"> {{ $message }}</div>
+                        <div class="alert alert-danger"> {{ $message }}</div>
                         @enderror
                     </div>
                 </div>
@@ -86,6 +95,18 @@
 
                 <br>
                 <div class="input-group row">
+                    <label for="count" class="col-sm-2 col-form-label">Количнство: </label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" name="count" id="count"
+                               value="{{ old('count', isset($product) ? $product->count : null ) }}">
+                        @error('count')
+                        <div class="alert alert-danger"> {{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+
+                <br>
+                <div class="input-group row">
                     <label for="description" class="col-sm-2 col-form-label">Описание: </label>
                     <div class="col-sm-6">
                         <textarea name="description" id="description" cols="72"
@@ -110,17 +131,17 @@
                     </div>
                 </div>
 
-                    @foreach(['new' => 'Новинка','hit' => 'Хит продаж','sale' => 'Скидка'] as $key => $value)
-                        <br>
-                        <div class="input-group row">
-                            <label for="{{ $key }}" class="col-sm-2 col-form-label">{{ $value }} </label>
-                            <div class="col-sm-6">
-                                <input type="checkbox" class="form-check" name="{{ $key }}" id="{{ $key }}"
-                                @if(isset($product) && $product[$key] === 1) checked="checked" @endif
-                                >
-                            </div>
+                @foreach(['new' => 'Новинка','hit' => 'Хит продаж','sale' => 'Скидка'] as $key => $value)
+                    <br>
+                    <div class="input-group row">
+                        <label for="{{ $key }}" class="col-sm-2 col-form-label">{{ $value }} </label>
+                        <div class="col-sm-6">
+                            <input type="checkbox" class="form-check" name="{{ $key }}" id="{{ $key }}"
+                                   @if(isset($product) && $product[$key] === 1) checked="checked" @endif
+                            >
                         </div>
-                    @endforeach
+                    </div>
+                @endforeach
                 <button class="btn btn-success" type="submit">Сохранить</button>
             </div>
         </form>

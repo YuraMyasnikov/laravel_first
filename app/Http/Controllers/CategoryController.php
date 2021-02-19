@@ -23,6 +23,7 @@ class CategoryController extends Controller
     {
         $category = Category::where('code', $category_code)->first();
 
+
         return view('category',compact('category'));
     }
 

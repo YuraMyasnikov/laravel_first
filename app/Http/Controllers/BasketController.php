@@ -10,6 +10,7 @@ use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\ConfirmedOrderRequest;
 
 class BasketController extends Controller
 {
@@ -55,7 +56,7 @@ class BasketController extends Controller
     }
 
     //Подтверждение заказа
-    public function basketConfirm( Request $request)
+    public function basketConfirm( ConfirmedOrderRequest $request)
     {
         $order_id = session('order_id');
         // Если никаких товаров не выбрано
@@ -68,18 +69,22 @@ class BasketController extends Controller
 
         $success = $order->confirmedOrder($request->name, $request->phone);
 
-        if ($success)
-        {
-            session()->flash('success', 'Заявка принята, в ближайшее время тебе позвонят');
-        }
-        else{
-            session()->flash('error', 'Какая то хуйня, попробуй повторить заказ');
-        }
+        ($success) ? session()->flash('success', 'Заявка принята, в ближайшее время тебе позвонят') : '' ;
+
 
         if(Auth::check())
         {
             $order->user_id = Auth::id();
             $order->save();
+        }
+
+        foreach ($order->products as $product)
+        {
+            $productCount = $product->count;
+            $orderCount = $product->pivot->count;
+            $product = Product::where(['id'=>$product->id])->first();
+            $product->count = $productCount - $orderCount;
+            $product->update();
         }
 
         return redirect()->route('home');
@@ -99,6 +104,10 @@ class BasketController extends Controller
      */
     public function basketAdd($product_id)
     {
+        $productCount = Product::find($product_id)->count;
+        $product = Product::find($product_id);
+
+        //заказ по счету
         $order_id = session('order_id');
         //если сессия пустая
         if( is_null($order_id) )
@@ -113,17 +122,24 @@ class BasketController extends Controller
         if($order->products->contains($product_id))
         {
             $pivotRow = $order->products()->where('product_id' , $product_id)->first()->pivot;
-            $pivotRow->count++;
+
+            if($productCount > $pivotRow->count)
+            {
+                $pivotRow->count++;
+                session()->flash('success', 'Добавлен товар: ' . $product->name );
+            }
+            else
+            {
+                $pivotRow->count;
+                session()->flash('error', 'Количество товара '. $product->name .' только ' . $productCount . ' едениц(ы)'   );
+            };
+
             $pivotRow->update();
 
         }else
         {
             $order->products()->attach($product_id);
         }
-
-        $product = Product::find($product_id);
-
-        session()->flash('success', 'Добавлен товар: ' . $product->name );
 
         //используется редирект чтобы при обновлении стр. не добавлялось доп поле
         return redirect()->route('basket');

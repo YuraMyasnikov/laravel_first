@@ -33,6 +33,7 @@ return array(
     'App\\Http\\Requests\\AdminCategoriesRequest' => $baseDir . '/app/Http/Requests/AdminCategoriesRequest.php',
     'App\\Http\\Requests\\AdminProductsRequest' => $baseDir . '/app/Http/Requests/AdminProductsRequest.php',
     'App\\Http\\Requests\\ContactRequest' => $baseDir . '/app/Http/Requests/ContactRequest.php',
+    'App\\Http\\Requests\\ProductFilterRequest' => $baseDir . '/app/Http/Requests/ProductFilterRequest.php',
     'App\\Http\\Requests\\RegisterRequest' => $baseDir . '/app/Http/Requests/RegisterRequest.php',
     'App\\Models\\Category' => $baseDir . '/app/Models/Category.php',
     'App\\Models\\Order' => $baseDir . '/app/Models/Order.php',

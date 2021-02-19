@@ -15,21 +15,25 @@
         <div class="caption">
             <h4 class="cardItemName">{{ $product->name }}</h4>
             <p>{{ $product->category->name }}</p>
-            @if($product->price > 0)
             <p>{{ $product->price }} ₽</p>
-            @else
-            <p><b>Товар отсутствует</b></p>
+            @if($product->count == 1)
+                <p>Последний шанс</p>
+            @elseif($product->count > 1 )
+                <p>Торопись, осталось немного</p>
+            @elseif($product->count == 0)
+                <p>Временно отсутствует</p>
             @endif
+
 
             <p>
             <form action="{{ route('basketAdd', $product) }}" method="post">
                 @csrf
-                @if($product->price > 0)
+                @if($product->count > 0)
                     <button type="submit" class="btn btn-success"> В корзину</button>
                 @else
-                    <button disabled type="submit" class="btn btn-success"> В корзину</button>
+                    <button disabled type="submit" class="btn "> В корзину</button>
                 @endif
-                <a href="{{ route('product',[$product->category->code, $product->code]) }}" class="btn btn-default">Подробнее</a>
+                <a href="{{ route('product',[isset($category) ? $category->code : $product->category->code, $product->code]) }}" class="btn btn-default">Подробнее</a>
             </form>
             </p>
         </div>

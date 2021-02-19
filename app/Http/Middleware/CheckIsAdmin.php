@@ -18,9 +18,10 @@ class CheckIsAdmin
     public function handle(Request $request, Closure $next)
     {
         if(!Auth::user()->is_admin){
-            session()->flash('error', 'У тебя не достаточно прав');
+            /*session()->flash('error', 'У тебя не достаточно прав');*/
             return redirect()->route('home');
         }
         return $next($request);
+
     }
 }

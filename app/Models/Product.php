@@ -10,7 +10,7 @@ class Product extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['code', 'name', 'description', 'price', 'category_id', 'image', 'new', 'hit', 'sale'];
+    protected $fillable = ['code', 'name', 'description', 'price', 'category_id', 'image', 'new', 'hit', 'sale','show','count'];
 
     public function category()
     {
@@ -30,13 +30,26 @@ class Product extends Model
     }
 
     //scope
-    public function scopeCategory($cat)
+   public function scopeNew($query)
+   {
+       return $query->where('new', 1);
+   }
+    public function scopeHit($query)
     {
-        return $cat->with('category')->name;
+        return $query->where('hit', 1);
+    }
+    public function scopeSale($query)
+    {
+        return $query->where('sale', 1);
     }
     //<<scope
 
     //мутаторы
+    public function setShowAttribute($value)
+    {
+        $this->attributes['show'] = $value == 'on' ? $value=1 : $value=0;
+    }
+
     public function setNewAttribute($value)
     {
         $this->attributes['new'] = $value == 'on' ? $value=1 : $value=0;

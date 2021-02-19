@@ -28,14 +28,13 @@
             {
                 if($request->$fieldCheck)
                 {
-                    $productsQuery->where($fieldCheck, 1);
+                    $productsQuery->$fieldCheck();
                 }
             }
-
                                                             /*
                                                              * withPath описание данного хелпера или кто это я не нашел
                                                              * withPath думаю в следующей страницы погинации строит url
-                                                             * getQueryString() |page=3| показывает на какой странице пагинации
+                                                             * getQueryString() |&page=3| показывает на какой странице пагинации
                                                             */
             $products = $productsQuery->paginate(9)->withPath('?'. $request->getQueryString());
             return view('index', compact('products','request'));

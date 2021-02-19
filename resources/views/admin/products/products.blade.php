@@ -18,15 +18,19 @@
                     Название
                 </th>
                 <th>
+                    Кол-во
+                </th>
+                <th>
                     Действия
                 </th>
             </tr>
 
             @foreach($products as $product)
                 <tr>
-                    <td>{{ $product->id }}</td>
-                    <td>{{ $product->code }}</td>
-                    <td>{{ $product->name }}</td>
+                    <td>{{ $product->id  }}</td>
+                    <td>{{ $product->code  }}</td>
+                    <td>{{ $product->name  }}</td>
+                    <td>{{ $product->count }}</td>
                     <td>
                         <div class="btn-group" role="group">
                             <form action="{{ route('products.destroy', $product) }}" method="POST">
