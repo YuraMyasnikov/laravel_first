@@ -10,9 +10,10 @@
     <p>{{ $product->description }}</p>
 
     <form action="http://internet-shop.tmweb.ru/basket/add/1" method="POST">
-        <button type="submit" class="btn btn-success" role="button">Добавить в корзину</button>
-
-        <input type="hidden" name="_token" value="cNsAeFCPUojidBKsTSDyrmGX6JmjnoTcluwNF1EF">        </form>
+        <button type="submit" class="btn btn-success" role="button"
+        @isset($product->deleted_at) disabled @endisset
+        >Добавить в корзину</button>
+        @csrf        </form>
 @endsection
 
 

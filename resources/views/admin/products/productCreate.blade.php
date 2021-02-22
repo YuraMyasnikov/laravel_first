@@ -34,7 +34,7 @@
                     <label for="show" class="col-sm-2 col-form-label">Показать на сайте </label>
                     <div class="col-sm-6">
                         <input type="checkbox" class="form-check" name="show" id="show"
-                               @if(isset($product) && $product->show !== 0) checked="checked" @endif
+                               @if( !isset($product) || $product->show == 1) checked="checked" @endif
                         >
                     </div>
                 </div>

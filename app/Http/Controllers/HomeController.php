@@ -14,7 +14,7 @@
         public function home (ProductFilterRequest $request)
         {
 
-            $productsQuery = Product::with('category');
+            $productsQuery = Product::where('show',1)->with('category');
 
             if($request->price_from)
             {

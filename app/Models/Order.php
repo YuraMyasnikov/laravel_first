@@ -25,7 +25,7 @@ class Order extends Model
     public function getFullPrice()
     {
         $sum = null;
-        foreach ($this->products as $product)
+        foreach ($this->products()->withTrashed()->get() as $product)
         {
             $sum += $product->getPriceForCount();
         }

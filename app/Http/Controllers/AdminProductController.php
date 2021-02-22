@@ -50,7 +50,9 @@ class AdminProductController extends Controller
             $params['image'] = $path;
         }
 
+        ( isset($params['show'])) ? $params['show'] = 0 : $params['show'] = 1;
         Product::create($params);
+
         return redirect(route('products.index'));
     }
 
@@ -108,6 +110,13 @@ class AdminProductController extends Controller
               $params[$name] = 1;
           }
 
+
+          if($product->show !== 1) {
+              $product->show = 0;
+          }
+          else{
+              $product->show = 1;
+          }
         }
 
 
