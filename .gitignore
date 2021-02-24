@@ -34,4 +34,4 @@ backcontrol.json
 !/storage/framework
 !/storage/logs
 /storage
-.env
+

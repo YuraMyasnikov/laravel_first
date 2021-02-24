@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Blade;
+use App\Models\Product;
+use App\Observers\ProductObserver;
 
 
 class AppServiceProvider extends ServiceProvider
@@ -25,8 +27,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        //Устанавливание новой дириктории для blade
         Blade::directive('routeactive' , function ($route){
             return "<?php echo Route::currentRouteNamed($route) ? 'class=\"active\"' : '' ?>";
         });
+
+        //Устанавливаю тригер на изменение таблицы товара
+        Product::observe(ProductObserver::class);
     }
 }

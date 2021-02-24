@@ -96,10 +96,10 @@ Route::group(['prefix' => 'basket'], function() {
     });
     Route::post('/add/{product_id}', [BasketController::class, 'basketAdd'])->name('basketAdd');
 });
-
 Route::get('/reset', [ResetController::class, 'reset'])->name('reset');
 Route::get('/{category}', [CategoryController::class, 'category'])->name('category');
 Route::get('/{category}/{product}', [CategoryController::class, 'product'])->name('product');
+Route::post('subscription/{product}',[CategoryController::class, 'subscripe'])->name('subscripe');
 
 
 
