@@ -11,6 +11,8 @@ use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\ConfirmedOrderRequest;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\OrderSuccess;
 
 class BasketController extends Controller
 {
@@ -86,6 +88,11 @@ class BasketController extends Controller
             $product->count = $productCount - $orderCount;
             $product->update();
         }
+
+        $email = Auth::check() ? Auth::user()->email : $request->email;
+        $name = Auth::check() ? Auth::user()->name : $request->name;
+
+        Mail::to($email)->send(new OrderSuccess($order, $name));
 
         return redirect()->route('home');
     }

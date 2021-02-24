@@ -31,7 +31,7 @@ class CategoryController extends Controller
     public function product ($category_code, $product_code=null)
     {
         $category = Category::where('code', $category_code)->first();
-        $product = Product::withTrashed()->where('code',$product_code)->first();
+        $product = Product::withTrashed()->where('code',$product_code)->firstOrFail();
         return view('product',compact('product'));
     }
 

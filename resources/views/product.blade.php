@@ -9,7 +9,7 @@
     <img src="{{ Storage::url($product->image) }}">
     <p>{{ $product->description }}</p>
 
-    <form action="http://internet-shop.tmweb.ru/basket/add/1" method="POST">
+    <form action="{{ route('basketAdd', $product) }}" method="POST">
         <button type="submit" class="btn btn-success" role="button"
         @isset($product->deleted_at) disabled @endisset
         >Добавить в корзину</button>

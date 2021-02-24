@@ -20,7 +20,9 @@
             <tr>
                 <td>
                     <a href="{{ route('product', [$product->category->code, $product->code] ) }}">
-                        <img height="56px" src="{{ Storage::url($product->image) }}">
+                        <div style="width: 60px;display: inline-block">
+                            <img height="56px" src="{{ Storage::url($product->image) }}">
+                        </div>
                         {{ $product->name}}
                     </a>
                     @if($product->isNew())
