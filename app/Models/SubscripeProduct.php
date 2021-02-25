@@ -15,7 +15,7 @@ class SubscripeProduct extends Model
 
     protected $fillable = ['email', 'product_id'];
 
-    public static function scopeSubscribeWithStatusZeroInProduct($query, $productId){
+    public function scopeSubscribeWithStatusZeroInProduct($query, $productId){
         return $query->where('status',0)->where('product_id',$productId)->get();
     }
 

@@ -3,7 +3,7 @@
 @section('title','Главная страница')
 
 @section('content')
-    <h1>Все товары</h1>
+    <h1>@lang('home.products')</h1>
     <div class="row"  style="margin: 30px 0;">
         <div class="col">
             @error('price_from')
@@ -26,7 +26,9 @@
                 </label>
 
             </div>
-            @foreach(['new'=>'Новинка','hit'=>'Хит','sale'=>'Скидка'] as $fieldCheck => $fieldValue)
+            @foreach(['new'=>__('home.filter.new'),'hit'=>__('home.filter.hit'),'sale'=>__('home.filter.sale')] as
+            $fieldCheck =>
+            $fieldValue)
                 <div class="col-sm-2 col-md-2">
                     <label for="{{ $fieldCheck }}">
                         <input type="checkbox" name="{{ $fieldCheck }}" id="{{ $fieldCheck }}"

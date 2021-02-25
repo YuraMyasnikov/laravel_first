@@ -24,15 +24,15 @@
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
-            <a class="navbar-brand" href="<?php echo e(route('home')); ?>">Интернет Магазин</a>
+            <a class="navbar-brand" href="<?php echo e(route('home')); ?>"><?php echo app('translator')->get('home.title'); ?></a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li <?php echo Route::currentRouteNamed('home') ? 'class="active"' : '' ?>> <a href="<?php echo e(route('home')); ?>">Все товары</a> </li>
-                <li <?php echo Route::currentRouteNamed('categor*') ? 'class="active"' : '' ?>><a href="<?php echo e(route('categories')); ?>">Категории</a> </li>
-                <li <?php echo Route::currentRouteNamed('basket*') ? 'class="active"' : '' ?>><a href="<?php echo e(route('basket')); ?>">В корзину</a></li>
-                <li><a href="<?php echo e(route('reset')); ?>">Сбросить проект в начальное состояние</a></li>
-                <li><a href="http://internet-shop.tmweb.ru/locale/en">en</a></li>
+                <li <?php echo Route::currentRouteNamed('home') ? 'class="active"' : '' ?>> <a href="<?php echo e(route('home')); ?>"><?php echo app('translator')->get('home.products'); ?></a> </li>
+                <li <?php echo Route::currentRouteNamed('categor*') ? 'class="active"' : '' ?>><a href="<?php echo e(route('categories')); ?>"><?php echo app('translator')->get('home.categories'); ?></a> </li>
+                <li <?php echo Route::currentRouteNamed('basket*') ? 'class="active"' : '' ?>><a href="<?php echo e(route('basket')); ?>"><?php echo app('translator')->get('home.basket'); ?></a></li>
+                <li><a href="<?php echo e(route('reset')); ?>"><?php echo app('translator')->get('home.reset'); ?></a></li>
+                <li><a href="<?php echo e(route('locale', __('home.set_lang'))); ?>"><?php echo app('translator')->get('home.curent_lang'); ?></a></li>
 
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">₽<span class="caret"></span></a>
@@ -46,15 +46,15 @@
 
             <ul class="nav navbar-nav navbar-right">
                 <?php if(auth()->guard()->guest()): ?>
-                    <li><a href="<?php echo e(route('user.login')); ?>">Войти</a></li>
+                    <li><a href="<?php echo e(route('user.login')); ?>"><?php echo app('translator')->get('home.login'); ?></a></li>
                 <?php endif; ?>
                 <?php if(auth()->guard()->check()): ?>
                     <?php if(Auth::user()->is_admin): ?>
-                        <li><a href="<?php echo e(route('user.private')); ?>">Админ</a></li>
-                        <li><a href="<?php echo e(route('user.logout')); ?>">Выйти</a></li>
+                        <li><a href="<?php echo e(route('user.private')); ?>"><?php echo app('translator')->get('home.admin'); ?></a></li>
+                        <li><a href="<?php echo e(route('user.logout')); ?>"><?php echo app('translator')->get('home.logout'); ?></a></li>
                     <?php else: ?>
-                        <li><a href="<?php echo e(route('user.cabinet')); ?>">Личный кабинет</a></li>
-                        <li><a href="<?php echo e(route('user.logout')); ?>">Выйти</a></li>
+                        <li><a href="<?php echo e(route('user.cabinet')); ?>"><?php echo app('translator')->get('home.cabinet'); ?></a></li>
+                        <li><a href="<?php echo e(route('user.logout')); ?>"><?php echo app('translator')->get('home.logout'); ?></a></li>
                     <?php endif; ?>
                 <?php endif; ?>
             </ul>
