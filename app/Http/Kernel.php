@@ -69,6 +69,7 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'lang' => \App\Http\Middleware\LocaleLanguage::class,
+        'currency' => \App\Http\Middleware\Currency::class,
     ];
     protected $middlewarePriority = [];
 }

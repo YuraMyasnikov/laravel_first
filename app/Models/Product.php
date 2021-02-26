@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Category;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Services\ConvertCurrency;
 
 class Product extends Model
 {
@@ -81,6 +82,11 @@ class Product extends Model
     public function isSale()
     {
         return $this->sale === 1;
+    }
+
+    public function getPriceAttribute($value)
+    {
+        return round(ConvertCurrency::convert($value), 2);
     }
 
 }

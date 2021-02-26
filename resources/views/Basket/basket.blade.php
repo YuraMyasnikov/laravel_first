@@ -51,13 +51,13 @@
                         </form>
                     </div>
                 </td>
-                <td>{{$product->price}} ₽</td>
-                <td>{{$product->getPriceForCount()}} ₽</td>
+                <td>{{$product->price}} {{ App\Services\ConvertCurrency::getCurrencySymbol() }}</td>
+                <td>{{$product->getPriceForCount()}} {{ App\Services\ConvertCurrency::getCurrencySymbol() }}</td>
             </tr>
             @endforeach
             <tr>
                 <td colspan="3">Общая стоимость:</td>
-                <td>{{$order->getFullPrice()}} ₽</td>
+                <td>{{$order->getFullPrice()}}{{ App\Services\ConvertCurrency::getCurrencySymbol() }}</td>
             </tr>
             </tbody>
         </table>

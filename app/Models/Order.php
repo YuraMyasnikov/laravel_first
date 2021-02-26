@@ -21,7 +21,6 @@ class Order extends Model
     }
 
 
-
     public function getFullPrice()
     {
         $sum = null;

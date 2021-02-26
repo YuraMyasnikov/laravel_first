@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use App\Models\Valute;
 
 class DatabaseSeeder extends Seeder
 {
@@ -19,5 +20,6 @@ class DatabaseSeeder extends Seeder
         $this->call(ProductTableSeeder::class);
         $this->call(OrderTableSeeder::class);
         $this->call(OrderProductTableSeeder::class);
+        $this->call(CurrenciesSeeder::class);
     }
 }

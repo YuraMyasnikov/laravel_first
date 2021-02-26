@@ -1,9 +1,7 @@
-
-
 <?php $__env->startSection('title','Главная страница'); ?>
 
 <?php $__env->startSection('content'); ?>
-    <h1>Все товары</h1>
+    <h1><?php echo app('translator')->get('home.products'); ?></h1>
     <div class="row"  style="margin: 30px 0;">
         <div class="col">
             <?php $__errorArgs = ['price_from'];
@@ -40,7 +38,8 @@ unset($__errorArgs, $__bag); ?>
                 </label>
 
             </div>
-            <?php $__currentLoopData = ['new'=>'Новинка','hit'=>'Хит','sale'=>'Скидка']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $fieldCheck => $fieldValue): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+            <?php $__currentLoopData = ['new'=>__('home.filter.new'),'hit'=>__('home.filter.hit'),'sale'=>__('home.filter.sale')]; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $fieldCheck =>
+            $fieldValue): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <div class="col-sm-2 col-md-2">
                     <label for="<?php echo e($fieldCheck); ?>">
                         <input type="checkbox" name="<?php echo e($fieldCheck); ?>" id="<?php echo e($fieldCheck); ?>"

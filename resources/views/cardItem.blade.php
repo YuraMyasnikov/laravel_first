@@ -15,7 +15,7 @@
         <div class="caption">
             <h4 class="cardItemName">{{ $product->name }}</h4>
             <p>{{ $product->category->name }}</p>
-            <p>{{ $product->price }} ₽</p>
+            <p>{{ $product->price }} {{ App\Services\ConvertCurrency::getCurrencySymbol() }}</p>
             @if($product->count == 1)
                 <p>Последний шанс</p>
             @elseif($product->count > 1 )

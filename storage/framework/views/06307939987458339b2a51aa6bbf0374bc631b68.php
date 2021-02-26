@@ -33,13 +33,15 @@
                 <li <?php echo Route::currentRouteNamed('basket*') ? 'class="active"' : '' ?>><a href="<?php echo e(route('basket')); ?>"><?php echo app('translator')->get('home.basket'); ?></a></li>
                 <li><a href="<?php echo e(route('reset')); ?>"><?php echo app('translator')->get('home.reset'); ?></a></li>
                 <li><a href="<?php echo e(route('locale', __('home.set_lang'))); ?>"><?php echo app('translator')->get('home.curent_lang'); ?></a></li>
-
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">₽<span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="http://internet-shop.tmweb.ru/currency/RUB">₽</a></li>
-                        <li><a href="http://internet-shop.tmweb.ru/currency/USD">$</a></li>
-                        <li><a href="http://internet-shop.tmweb.ru/currency/EUR">€</a></li>
+                    <a id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Валюта
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="dLabel">
+                        <?php $__currentLoopData = App\Models\Currency::get(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $currency): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <li><a href="<?php echo e(route('currency' , $currency->code)); ?>"><?php echo e($currency->code); ?></a></li>
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </ul>
                 </li>
             </ul>

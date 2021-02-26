@@ -83,10 +83,11 @@
     Route::get('admin/order', [AuthController::class, 'show'])->name('show');
 });
 
-    Route::middleware('lang')->group(function (){
+    Route::middleware(['lang','currency'])->group(function (){
         Route::get('/', [HomeController::class, 'home'])->name('home');
         Route::get('/categories', [CategoryController::class, 'categories'])->name('categories');
         Route::get('local/{locale}' , [LocaleController::class, 'index'])->name('locale');
+        Route::get('currency/{currency}' , [LocaleController::class, 'currency'])->name('currency');
 
         /**
          * Корзина
