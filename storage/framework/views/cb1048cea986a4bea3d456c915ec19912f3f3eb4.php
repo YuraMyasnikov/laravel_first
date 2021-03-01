@@ -1,6 +1,4 @@
-
-
-<?php if(isset($category)): ?>
+<?php if(isset($property)): ?>
     <?php $__env->startSection('title', 'Редактирование ' . $product->name); ?>
 <?php else: ?>
     <?php $__env->startSection('title', 'Создать товар'); ?>
@@ -81,14 +79,14 @@ unset($__errorArgs, $__bag); ?>
                     <label for="price" class="col-sm-2 col-form-label">Категория: </label>
                     <div class="col-sm-6">
                         <select name="category_id" id="category_id" class="form-control" style="height: auto;">
-                            <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                <option value="<?php echo e($category->id); ?>"
+                            <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $property): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <option value="<?php echo e($property->id); ?>"
                                         <?php if(isset($product)): ?>
-                                        <?php if($category->id == $product->category_id): ?>
+                                        <?php if($property->id == $product->category_id): ?>
                                         selected
                                     <?php endif; ?>
                                     <?php endif; ?>
-                                > <?php echo e($category->name); ?>
+                                > <?php echo e($property->name); ?>
 
                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </select>

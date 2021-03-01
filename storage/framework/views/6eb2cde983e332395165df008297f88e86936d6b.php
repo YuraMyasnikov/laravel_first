@@ -1,7 +1,5 @@
-
-
-<?php if(isset($category)): ?>
-    <?php $__env->startSection('title', 'Редактирование ' . $category->name); ?>
+<?php if(isset($property)): ?>
+    <?php $__env->startSection('title', 'Редактирование ' . $property->name); ?>
 <?php else: ?>
     <?php $__env->startSection('title', 'Создать категорию'); ?>
 <?php endif; ?>
@@ -10,16 +8,16 @@
 <?php $__env->startSection('content'); ?>
     <div class="col-md-12">
 
-        <?php if(isset($category)): ?>
-        <h1>Редактирование категории <b><?php echo e($category->name); ?></b></h1>
+        <?php if(isset($property)): ?>
+        <h1>Редактирование категории <b><?php echo e($property->name); ?></b></h1>
         <?php else: ?>
             <h1>Добавить Категорию</h1>
         <?php endif; ?>
 
         <form method="POST" enctype="multipart/form-data"
               action="
-                    <?php if(isset($category)): ?>
-                        <?php echo e(route('categories.update', $category)); ?>
+                    <?php if(isset($property)): ?>
+                        <?php echo e(route('categories.update', $property)); ?>
 
                     <?php else: ?>
                         <?php echo e(route('categories.store')); ?>
@@ -27,7 +25,7 @@
                     <?php endif; ?>
                   ">
             <div>
-                <?php if(isset($category)): ?>
+                <?php if(isset($property)): ?>
                     <?php echo method_field('PUT'); ?>
                 <?php endif; ?>
                 <?php echo csrf_field(); ?>
@@ -35,7 +33,7 @@
                     <label for="code" class="col-sm-2 col-form-label">Код: </label>
                     <div class="col-sm-6">
                         <input type="text" class="form-control" name="code" id="code"
-                               value="<?php echo e(old('code', isset($category) ? $category->code : null)); ?>">
+                               value="<?php echo e(old('code', isset($property) ? $property->code : null)); ?>">
                         <?php $__errorArgs = ['code'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -53,7 +51,7 @@ unset($__errorArgs, $__bag); ?>
                     <label for="name" class="col-sm-2 col-form-label">Название: </label>
                     <div class="col-sm-6">
                         <input type="text" class="form-control" name="name" id="name"
-                               value="<?php echo e(old('name', isset($category) ? $category->name : null)); ?>">
+                               value="<?php echo e(old('name', isset($property) ? $property->name : null)); ?>">
                         <?php $__errorArgs = ['name'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -72,7 +70,7 @@ unset($__errorArgs, $__bag); ?>
                     <label for="description" class="col-sm-2 col-form-label">Описание: </label>
                     <div class="col-sm-6">
                         <textarea name="description" id="description" cols="72"
-                                  rows="7"><?php echo e(old('description', isset($category) ? $category->description : null)); ?></textarea>
+                                  rows="7"><?php echo e(old('description', isset($property) ? $property->description : null)); ?></textarea>
                         <?php $__errorArgs = ['description'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :

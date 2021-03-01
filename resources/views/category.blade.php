@@ -3,10 +3,10 @@
 @section('title','Категории')
 
 @section('content')
-    <h1>{{ $category->name }}</h1>
-    <p>В категории {{ $category->products->count() }} товара</p>
+    <h1>{{ $property->name }}</h1>
+    <p>В категории {{ $property->products->count() }} товара</p>
 
-    @foreach($category->products()->with('category')->get() as $product)
+    @foreach($property->products()->with('category')->get() as $product)
         @include('cardItem',compact('product'))
     @endforeach
 

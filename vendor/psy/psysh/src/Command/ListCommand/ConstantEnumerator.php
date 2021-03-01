@@ -20,7 +20,7 @@ use Symfony\Component\Console\Input\InputInterface;
 class ConstantEnumerator extends Enumerator
 {
     // Because `Json` is ugly.
-    private static $categoryLabels = [
+    private static $propertyLabels = [
         'libxml'   => 'libxml',
         'openssl'  => 'OpenSSL',
         'pcre'     => 'PCRE',
@@ -63,17 +63,17 @@ class ConstantEnumerator extends Enumerator
 
         $user = $input->getOption('user');
         $internal = $input->getOption('internal');
-        $category = $input->getOption('category');
+        $property = $input->getOption('category');
 
-        if ($category) {
-            $category = \strtolower($category);
+        if ($property) {
+            $property = \strtolower($property);
 
-            if ($category === 'internal') {
+            if ($property === 'internal') {
                 $internal = true;
-                $category = null;
-            } elseif ($category === 'user') {
+                $property = null;
+            } elseif ($property === 'user') {
                 $user = true;
-                $category = null;
+                $property = null;
             }
         }
 
@@ -87,13 +87,13 @@ class ConstantEnumerator extends Enumerator
             $ret['Internal Constants'] = $this->getConstants('internal');
         }
 
-        if ($category) {
-            $caseCategory = \array_key_exists($category, self::$categoryLabels) ? self::$categoryLabels[$category] : \ucfirst($category);
+        if ($property) {
+            $caseCategory = \array_key_exists($property, self::$propertyLabels) ? self::$propertyLabels[$property] : \ucfirst($property);
             $label = $caseCategory.' Constants';
-            $ret[$label] = $this->getConstants($category);
+            $ret[$label] = $this->getConstants($property);
         }
 
-        if (!$user && !$internal && !$category) {
+        if (!$user && !$internal && !$property) {
             $ret['Constants'] = $this->getConstants();
         }
 
@@ -118,26 +118,26 @@ class ConstantEnumerator extends Enumerator
      * Optionally restrict constants to a given category, e.g. "date". If the
      * category is "internal", include all non-user-defined constants.
      *
-     * @param string $category
+     * @param string $property
      *
      * @return array
      */
-    protected function getConstants($category = null)
+    protected function getConstants($property = null)
     {
-        if (!$category) {
+        if (!$property) {
             return \get_defined_constants();
         }
 
         $consts = \get_defined_constants(true);
 
-        if ($category === 'internal') {
+        if ($property === 'internal') {
             unset($consts['user']);
 
             return \call_user_func_array('array_merge', \array_values($consts));
         }
 
         foreach ($consts as $key => $value) {
-            if (\strtolower($key) === $category) {
+            if (\strtolower($key) === $property) {
                 return $value;
             }
         }

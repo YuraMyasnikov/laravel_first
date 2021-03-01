@@ -1897,13 +1897,13 @@ class Engineering
      *
      * @Deprecated Use the getConversionCategoryUnits() method in the ConvertUOM class instead
      *
-     * @param null|mixed $category
+     * @param null|mixed $property
      *
      * @return array
      */
-    public static function getConversionGroupUnits($category = null)
+    public static function getConversionGroupUnits($property = null)
     {
-        return Engineering\ConvertUOM::getConversionCategoryUnits($category);
+        return Engineering\ConvertUOM::getConversionCategoryUnits($property);
     }
 
     /**
@@ -1911,13 +1911,13 @@ class Engineering
      *
      * @Deprecated Use the getConversionCategoryUnitDetails() method in the ConvertUOM class instead
      *
-     * @param null|mixed $category
+     * @param null|mixed $property
      *
      * @return array
      */
-    public static function getConversionGroupUnitDetails($category = null)
+    public static function getConversionGroupUnitDetails($property = null)
     {
-        return Engineering\ConvertUOM::getConversionCategoryUnitDetails($category);
+        return Engineering\ConvertUOM::getConversionCategoryUnitDetails($property);
     }
 
     /**

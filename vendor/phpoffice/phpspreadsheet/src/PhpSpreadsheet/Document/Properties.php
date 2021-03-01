@@ -73,7 +73,7 @@ class Properties
      *
      * @var string
      */
-    private $category = '';
+    private $property = '';
 
     /**
      * Manager.
@@ -332,13 +332,13 @@ class Properties
     /**
      * Set Category.
      *
-     * @param string $category
+     * @param string $property
      *
      * @return $this
      */
-    public function setCategory($category)
+    public function setCategory($property)
     {
-        $this->category = $category;
+        $this->category = $property;
 
         return $this;
     }

@@ -20,6 +20,11 @@ class Product extends Model
         return $this->belongsTo(Category::class);
     }
 
+    public function offer ()
+    {
+        return $this->hasMany(TradeOffer::class);
+    }
+
     public function getPriceForCount()
     {
         if(!is_null($this->pivot))

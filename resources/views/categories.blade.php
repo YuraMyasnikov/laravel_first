@@ -37,14 +37,14 @@
     </form>--}}
 
     <div class="starter-template">
-        @foreach($categories as $category)
+        @foreach($categories as $property)
             <div class="panel">
-                <a href="{{ $category->code }}">
-                    <img src="{{ Storage::url($category->image) }}" height="50px">
-                    <h2>{{ $category->name }}</h2>
+                <a href="{{ $property->code }}">
+                    <img src="{{ Storage::url($property->image) }}" height="50px">
+                    <h2>{{ $property->name }}</h2>
                 </a>
                 <p>
-                    {{ $category->description }}
+                    {{ $property->description }}
                 </p>
             </div>
         @endforeach

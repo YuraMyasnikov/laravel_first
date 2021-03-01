@@ -28,7 +28,7 @@ class Image extends Base
      *
      * @param int $width
      * @param int $height
-     * @param string|null $category
+     * @param string|null $property
      * @param bool $randomize
      * @param string|null $word
      * @param bool $gray
@@ -38,7 +38,7 @@ class Image extends Base
     public static function imageUrl(
         $width = 640,
         $height = 480,
-        $category = null,
+        $property = null,
         $randomize = true,
         $word = null,
         $gray = false
@@ -46,8 +46,8 @@ class Image extends Base
         $size = sprintf('%dx%d.png', $width, $height);
 
         $imageParts = [];
-        if ($category !== null) {
-            $imageParts[] = $category;
+        if ($property !== null) {
+            $imageParts[] = $property;
         }
         if ($word !== null) {
             $imageParts[] = $word;
@@ -78,7 +78,7 @@ class Image extends Base
         $dir = null,
         $width = 640,
         $height = 480,
-        $category = null,
+        $property = null,
         $fullPath = true,
         $randomize = true,
         $word = null,
@@ -96,7 +96,7 @@ class Image extends Base
         $filename = $name . '.png';
         $filepath = $dir . DIRECTORY_SEPARATOR . $filename;
 
-        $url = static::imageUrl($width, $height, $category, $randomize, $word, $gray);
+        $url = static::imageUrl($width, $height, $property, $randomize, $word, $gray);
 
         // save file
         if (function_exists('curl_exec')) {

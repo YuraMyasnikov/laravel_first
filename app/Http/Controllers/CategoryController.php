@@ -22,17 +22,17 @@ class CategoryController extends Controller
         return view('categories', compact('categories'));
     }
 
-    public function category ($category_code, $product_code=null)
+    public function category ($property_code, $product_code=null)
     {
-        $category = Category::where('code', $category_code)->first();
+        $property = Category::where('code', $property_code)->first();
 
 
         return view('category',compact('category'));
     }
 
-    public function product ($category_code, $product_code=null)
+    public function product ($property_code, $product_code=null)
     {
-        $category = Category::where('code', $category_code)->first();
+        $property = Category::where('code', $property_code)->first();
         $product = Product::withTrashed()->where('code',$product_code)->firstOrFail();
         return view('product',compact('product'));
     }

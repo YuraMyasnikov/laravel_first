@@ -56,10 +56,10 @@ class AdminCategoryController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Category  $category
+     * @param  \App\Models\Category  $property
      * @return \Illuminate\Http\Response
      */
-    public function show(Category $category)
+    public function show(Category $property)
     {
         return view('admin/categories/categoryShow', compact('category'));
     }
@@ -67,10 +67,10 @@ class AdminCategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Category  $category
+     * @param  \App\Models\Category  $property
      * @return \Illuminate\Http\Response
      */
-    public function edit(Category $category)
+    public function edit(Category $property)
     {
         return view('admin/categories/categoryCreate', compact('category'));
     }
@@ -79,32 +79,32 @@ class AdminCategoryController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Category  $category
+     * @param  \App\Models\Category  $property
      * @return \Illuminate\Http\Response
      */
-    public function update(AdminCategoriesRequest $request, Category $category)
+    public function update(AdminCategoriesRequest $request, Category $property)
     {
         $params = $request->all();
         unset($params['image']);
         if($request->has('image'))
         {
-            Storage::delete($category->image);
+            Storage::delete($property->image);
             $path = $request->file('image')->store('category');
             $params['image'] = $path;
         }
-        $category->update($params);
+        $property->update($params);
         return redirect(route('categories.index'));
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Category  $category
+     * @param  \App\Models\Category  $property
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Category $category)
+    public function destroy(Category $property)
     {
-        $category->delete();
+        $property->delete();
         return redirect(route('categories.index'));
     }
 }

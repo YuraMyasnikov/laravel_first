@@ -15,6 +15,7 @@
     use App\Http\Controllers\AdminProductController;
     use App\Http\Controllers\ResetController;
     use App\Http\Controllers\LocaleController;
+    use App\Http\Controllers\AdminPropertyController;
 
     /*
     |--------------------------------------------------------------------------
@@ -78,10 +79,11 @@
 });
 
     Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function() {
-    Route::resource('admin/categories', AdminCategoryController::class);
-    Route::resource('admin/products', AdminProductController::class);
-    Route::get('admin/order', [AuthController::class, 'show'])->name('show');
-});
+        Route::resource('admin/properties', AdminPropertyController::class);
+        Route::resource('admin/categories', AdminCategoryController::class);
+        Route::resource('admin/products', AdminProductController::class);
+        Route::get('admin/order', [AuthController::class, 'show'])->name('show');
+    });
 
     Route::middleware(['lang','currency'])->group(function (){
         Route::get('/', [HomeController::class, 'home'])->name('home');

@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="col-md-12">
-        <h1>Категории</h1>
+        <h1>Свойства</h1>
         <table class="table">
             <tbody>
             <tr>
@@ -12,20 +12,16 @@
                     #
                 </th>
                 <th>
-                    Код
+                    Свойство
                 </th>
                 <th>
-                    Название
-                </th>
-                <th>
-                    Действия
+                    Действие
                 </th>
             </tr>
 
-            @foreach($categories as $property)
+            @foreach($properties as $property)
                 <tr>
                     <td>{{ $property->id }}</td>
-                    <td>{{ $property->code }}</td>
                     <td>{{ $property->name }}</td>
                     <td>
                         <div class="btn-group" role="group">
@@ -45,7 +41,7 @@
 
             </tbody>
         </table>
-        <a href="{{ route('categories.create') }}" class="btn btn-success">Добавить Категорию</a>
+        <a href="{{ route('properties.create') }}" class="btn btn-success">Добавить Свойство</a>
     </div>
 @endsection
 

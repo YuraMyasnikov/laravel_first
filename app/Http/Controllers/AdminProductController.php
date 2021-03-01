@@ -66,8 +66,8 @@ class AdminProductController extends Controller
     {
         $nameCategory =  function ($id)
         {
-            $category = Category::where('id', $id)->first();
-            return $category->name;
+            $property = Category::where('id', $id)->first();
+            return $property->name;
         };
 
         return view('admin/products/productShow', compact('product','nameCategory'));

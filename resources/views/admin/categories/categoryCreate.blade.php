@@ -1,7 +1,7 @@
 @extends('Layouts.authBasketLayout')
 
-@isset($category)
-    @section('title', 'Редактирование ' . $category->name)
+@isset($property)
+    @section('title', 'Редактирование ' . $property->name)
 @else
     @section('title', 'Создать категорию')
 @endisset
@@ -10,22 +10,22 @@
 @section('content')
     <div class="col-md-12">
 
-        @isset($category)
-        <h1>Редактирование категории <b>{{ $category->name }}</b></h1>
+        @isset($property)
+        <h1>Редактирование категории <b>{{ $property->name }}</b></h1>
         @else
             <h1>Добавить Категорию</h1>
         @endisset
 
         <form method="POST" enctype="multipart/form-data"
               action="
-                    @isset($category)
-                        {{ route('categories.update', $category) }}
+                    @isset($property)
+                        {{ route('categories.update', $property) }}
                     @else
                         {{ route('categories.store') }}
                     @endisset
                   ">
             <div>
-                @isset($category)
+                @isset($property)
                     @method('PUT')
                 @endisset
                 @csrf
@@ -33,7 +33,7 @@
                     <label for="code" class="col-sm-2 col-form-label">Код: </label>
                     <div class="col-sm-6">
                         <input type="text" class="form-control" name="code" id="code"
-                               value="{{ old('code', isset($category) ? $category->code : null) }}">
+                               value="{{ old('code', isset($property) ? $property->code : null) }}">
                         @error('code')
                             <div class="alert alert-danger"> {{ $message }} </div>
                         @enderror
@@ -44,7 +44,7 @@
                     <label for="name" class="col-sm-2 col-form-label">Название: </label>
                     <div class="col-sm-6">
                         <input type="text" class="form-control" name="name" id="name"
-                               value="{{ old('name', isset($category) ? $category->name : null) }}">
+                               value="{{ old('name', isset($property) ? $property->name : null) }}">
                         @error('name')
                         <div class="alert alert-danger"> {{ $message }} </div>
                         @enderror
@@ -56,7 +56,7 @@
                     <label for="description" class="col-sm-2 col-form-label">Описание: </label>
                     <div class="col-sm-6">
                         <textarea name="description" id="description" cols="72"
-                                  rows="7">{{ old('description', isset($category) ? $category->description : null)
+                                  rows="7">{{ old('description', isset($property) ? $property->description : null)
                                   }}</textarea>
                         @error('description')
                         <div class="alert alert-danger"> {{ $message }} </div>

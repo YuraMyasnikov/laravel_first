@@ -20,7 +20,6 @@
             })->map->sum()->sortByDesc(null)->take(4)->keys()->toArray();
 
             $bestProducts = Product::whereIn('id' , $bestProductsIds)->get();
-
             //всем вьюхам есть выход на переменную
             $view->with('bestProducts',$bestProducts);
         }

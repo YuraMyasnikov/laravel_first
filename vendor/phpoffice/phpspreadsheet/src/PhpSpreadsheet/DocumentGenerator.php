@@ -15,15 +15,15 @@ class DocumentGenerator
     public static function generateFunctionListByCategory(array $phpSpreadsheetFunctions): string
     {
         $result = "# Function list by category\n";
-        foreach (self::getCategories() as $categoryConstant => $category) {
+        foreach (self::getCategories() as $propertyConstant => $property) {
             $result .= "\n";
-            $result .= "## {$categoryConstant}\n";
+            $result .= "## {$propertyConstant}\n";
             $result .= "\n";
             $lengths = [20, 42];
             $result .= self::tableRow($lengths, ['Excel Function', 'PhpSpreadsheet Function']) . "\n";
             $result .= self::tableRow($lengths, null) . "\n";
             foreach ($phpSpreadsheetFunctions as $excelFunction => $functionInfo) {
-                if ($category === $functionInfo['category']) {
+                if ($property === $functionInfo['category']) {
                     $phpFunction = self::getPhpSpreadsheetFunctionText($functionInfo['functionCall']);
                     $result .= self::tableRow($lengths, [$excelFunction, $phpFunction]) . "\n";
                 }
@@ -74,7 +74,7 @@ class DocumentGenerator
      */
     public static function generateFunctionListByName(array $phpSpreadsheetFunctions): string
     {
-        $categoryConstants = array_flip(self::getCategories());
+        $propertyConstants = array_flip(self::getCategories());
         $result = "# Function list by name\n";
         $lastAlphabet = null;
         foreach ($phpSpreadsheetFunctions as $excelFunction => $functionInfo) {
@@ -87,9 +87,9 @@ class DocumentGenerator
                 $result .= self::tableRow($lengths, ['Excel Function', 'Category', 'PhpSpreadsheet Function']) . "\n";
                 $result .= self::tableRow($lengths, null) . "\n";
             }
-            $category = $categoryConstants[$functionInfo['category']];
+            $property = $propertyConstants[$functionInfo['category']];
             $phpFunction = self::getPhpSpreadsheetFunctionText($functionInfo['functionCall']);
-            $result .= self::tableRow($lengths, [$excelFunction, $category, $phpFunction]) . "\n";
+            $result .= self::tableRow($lengths, [$excelFunction, $property, $phpFunction]) . "\n";
         }
 
         return $result;

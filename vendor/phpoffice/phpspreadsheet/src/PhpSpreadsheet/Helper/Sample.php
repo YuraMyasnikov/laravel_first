@@ -85,13 +85,13 @@ class Sample
         foreach ($regex as $file) {
             $file = str_replace(str_replace('\\', '/', $baseDir) . '/', '', str_replace('\\', '/', $file[0]));
             $info = pathinfo($file);
-            $category = str_replace('_', ' ', $info['dirname']);
+            $property = str_replace('_', ' ', $info['dirname']);
             $name = str_replace('_', ' ', preg_replace('/(|\.php)/', '', $info['filename']));
-            if (!in_array($category, ['.', 'boostrap', 'templates'])) {
-                if (!isset($files[$category])) {
-                    $files[$category] = [];
+            if (!in_array($property, ['.', 'boostrap', 'templates'])) {
+                if (!isset($files[$property])) {
+                    $files[$property] = [];
                 }
-                $files[$category][$name] = $file;
+                $files[$property][$name] = $file;
             }
         }
 

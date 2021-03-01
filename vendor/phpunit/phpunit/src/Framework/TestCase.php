@@ -1643,9 +1643,9 @@ abstract class TestCase extends Assert implements Reorderable, SelfDescribing, T
             throw new Exception;
         }
 
-        [$category, $locale] = $args;
+        [$property, $locale] = $args;
 
-        if (!in_array($category, self::LOCALE_CATEGORIES, true)) {
+        if (!in_array($property, self::LOCALE_CATEGORIES, true)) {
             throw new Exception;
         }
 
@@ -1653,7 +1653,7 @@ abstract class TestCase extends Assert implements Reorderable, SelfDescribing, T
             throw new Exception;
         }
 
-        $this->locale[$category] = setlocale($category, 0);
+        $this->locale[$property] = setlocale($property, 0);
 
         $result = setlocale(...$args);
 
@@ -2470,8 +2470,8 @@ abstract class TestCase extends Assert implements Reorderable, SelfDescribing, T
 
     private function cleanupLocaleSettings(): void
     {
-        foreach ($this->locale as $category => $locale) {
-            setlocale($category, $locale);
+        foreach ($this->locale as $property => $locale) {
+            setlocale($property, $locale);
         }
 
         $this->locale = [];

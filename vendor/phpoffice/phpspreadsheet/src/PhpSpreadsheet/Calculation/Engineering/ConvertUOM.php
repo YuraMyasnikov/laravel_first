@@ -448,15 +448,15 @@ class ConvertUOM
      *    getConversionGroupUnits
      * Returns an array of units of measure, for a specified conversion group, or for all groups.
      *
-     * @param string $category The group whose units of measure you want to retrieve
+     * @param string $property The group whose units of measure you want to retrieve
      *
      * @return array
      */
-    public static function getConversionCategoryUnits($category = null)
+    public static function getConversionCategoryUnits($property = null)
     {
         $conversionGroups = [];
         foreach (self::$conversionUnits as $conversionUnit => $conversionGroup) {
-            if (($category === null) || ($conversionGroup['Group'] == $category)) {
+            if (($property === null) || ($conversionGroup['Group'] == $property)) {
                 $conversionGroups[$conversionGroup['Group']][] = $conversionUnit;
             }
         }
@@ -467,15 +467,15 @@ class ConvertUOM
     /**
      * getConversionGroupUnitDetails.
      *
-     * @param string $category The group whose units of measure you want to retrieve
+     * @param string $property The group whose units of measure you want to retrieve
      *
      * @return array
      */
-    public static function getConversionCategoryUnitDetails($category = null)
+    public static function getConversionCategoryUnitDetails($property = null)
     {
         $conversionGroups = [];
         foreach (self::$conversionUnits as $conversionUnit => $conversionGroup) {
-            if (($category === null) || ($conversionGroup['Group'] == $category)) {
+            if (($property === null) || ($conversionGroup['Group'] == $property)) {
                 $conversionGroups[$conversionGroup['Group']][] = [
                     'unit' => $conversionUnit,
                     'description' => $conversionGroup['Unit Name'],

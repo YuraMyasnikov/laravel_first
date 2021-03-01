@@ -1,6 +1,6 @@
 @extends('Layouts.authBasketLayout')
 
-@isset($category)
+@isset($property)
     @section('title', 'Редактирование ' . $product->name)
 @else
     @section('title', 'Создать товар')
@@ -65,14 +65,14 @@
                     <label for="price" class="col-sm-2 col-form-label">Категория: </label>
                     <div class="col-sm-6">
                         <select name="category_id" id="category_id" class="form-control" style="height: auto;">
-                            @foreach($categories as $category)
-                                <option value="{{ $category->id }}"
+                            @foreach($categories as $property)
+                                <option value="{{ $property->id }}"
                                         @isset($product)
-                                        @if($category->id == $product->category_id)
+                                        @if($property->id == $product->category_id)
                                         selected
                                     @endif
                                     @endisset
-                                > {{ $category->name }}
+                                > {{ $property->name }}
                             @endforeach
                         </select>
                         @error('category_id')

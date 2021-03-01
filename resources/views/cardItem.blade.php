@@ -33,7 +33,7 @@
                 @else
                     <button disabled type="submit" class="btn "> В корзину</button>
                 @endif
-                <a href="{{ route('product',[isset($category) ? $category->code : $product->category->code, $product->code]) }}" class="btn btn-default">Подробнее</a>
+                <a href="{{ route('product',[isset($property) ? $property->code : $product->category->code, $product->code]) }}" class="btn btn-default">Подробнее</a>
             </form>
             </p>
         </div>
