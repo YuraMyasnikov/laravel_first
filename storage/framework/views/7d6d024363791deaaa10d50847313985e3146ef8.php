@@ -82,6 +82,28 @@
         <?php echo $__env->yieldContent('content'); ?>
     </div>
 </div>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6"><p>Категории товаров</p>
+                <ul>
+                    <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <li><a href="<?php echo e(route('category', $category->code)); ?>"><?php echo e($category->name); ?></a></li>
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                </ul>
+            </div>
+            <div class="col-lg-6"><p>Самые популярные товары</p>
+                <ul>
+                    <?php $__currentLoopData = $bestProducts; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $bestProduct): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <li><a href="<?php echo e(route('product', [$product->category->code , $product->code])); ?>"><?php echo e($bestProduct->name); ?></a></li>
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+
 </body>
 </html>
 <?php /**PATH C:\OpenServer\domains\laravel\laravel_first\resources\views/Layouts/mainLayout.blade.php ENDPATH**/ ?>
