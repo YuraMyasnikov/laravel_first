@@ -54,7 +54,7 @@ class AdminPropertyController extends Controller
      */
     public function show(Property $property)
     {
-        //
+        return view('admin/property/show', compact('property'));
     }
 
     /**
@@ -65,7 +65,7 @@ class AdminPropertyController extends Controller
      */
     public function edit(Property $property)
     {
-        //
+        return  view('admin/property/create',compact('property'));
     }
 
     /**
@@ -77,7 +77,9 @@ class AdminPropertyController extends Controller
      */
     public function update(Request $request, Property $property)
     {
-        //
+        $properties = $request->all();
+        $property->update($properties);
+        return  redirect(route('properties.index'));
     }
 
     /**
@@ -88,6 +90,8 @@ class AdminPropertyController extends Controller
      */
     public function destroy(Property $property)
     {
-        //
+        $property->delete();
+
+        return redirect(route('properties.index'));
     }
 }

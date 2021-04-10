@@ -1,10 +1,10 @@
 @extends('Layouts.authBasketLayout')
 
-@section('title', 'Категория ' . $property->name)
+@section('title', 'Категория ' . $category->name)
 
 @section('content')
     <div class="col-md-12">
-        <h1>Категория {{ $property->name }}</h1>
+        <h1>Категория {{ $category->name }}</h1>
         <table class="table">
             <tbody>
             <tr>
@@ -17,28 +17,28 @@
             </tr>
             <tr>
                 <td>ID</td>
-                <td>{{ $property->id }}</td>
+                <td>{{ $category->id }}</td>
             </tr>
             <tr>
                 <td>Код</td>
-                <td>{{ $property->code }}</td>
+                <td>{{ $category->code }}</td>
             </tr>
             <tr>
                 <td>Название</td>
-                <td>{{ $property->name }}</td>
+                <td>{{ $category->name }}</td>
             </tr>
             <tr>
                 <td>Описание</td>
-                <td>{{ $property->description }}</td>
+                <td>{{ $category->description }}</td>
             </tr>
             <tr>
                 <td>Картинка</td>
-                <td><img src="{{ Storage::url($property->image) }}"
+                <td><img src="{{ Storage::url($category->image) }}"
                          height="240px"></td>
             </tr>
             <tr>
                 <td>Кол-во товаров</td>
-                <td>{{ $property->products->count() }}</td>
+                <td>{{ $category->products->count() }}</td>
             </tr>
             </tbody>
         </table>

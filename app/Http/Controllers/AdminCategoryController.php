@@ -59,7 +59,7 @@ class AdminCategoryController extends Controller
      * @param  \App\Models\Category  $property
      * @return \Illuminate\Http\Response
      */
-    public function show(Category $property)
+    public function show(Category $category)
     {
         return view('admin/categories/categoryShow', compact('category'));
     }

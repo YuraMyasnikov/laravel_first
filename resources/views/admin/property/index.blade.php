@@ -25,10 +25,10 @@
                     <td>{{ $property->name }}</td>
                     <td>
                         <div class="btn-group" role="group">
-                            <form action="{{ route('categories.destroy', $property) }}" method="POST">
-                                <a class="btn btn-success" type="button" href="{{ route('categories.show', $property)
+                            <form action="{{ route('properties.destroy', $property) }}" method="POST">
+                                <a class="btn btn-success" type="button" href="{{ route('properties.show', $property)
                                 }}">Открыть</a>
-                                <a class="btn btn-warning" type="button" href="{{ route('categories.edit', $property)
+                                <a class="btn btn-warning" type="button" href="{{ route('properties.edit', $property)
                                 }}">Редактировать</a>
                                 @csrf
                                 @method('DELETE')
