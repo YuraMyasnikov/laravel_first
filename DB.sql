@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Фев 26 2021 г., 15:30
+-- Время создания: Апр 10 2021 г., 16:09
 -- Версия сервера: 10.3.22-MariaDB
 -- Версия PHP: 7.4.5
 
@@ -98,8 +98,13 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (8, '2021_02_08_135845_alter_user', 1),
 (9, '2021_02_16_112152_alter_product_table', 1),
 (10, '2021_02_19_112826_alter_products_count_soft_dell_view', 1),
-(11, '2021_02_24_104949_create_subscripe_products_table', 1),
-(12, '2021_02_26_082208_create_currencies_table', 1);
+(11, '2021_02_24_104949_create_subscripe_products_table', 2),
+(12, '2021_02_26_082208_create_currencies_table', 2),
+(13, '2021_03_01_113807_create_trade_offers_table', 2),
+(14, '2021_03_01_113916_create_properties_table', 2),
+(15, '2021_03_01_113939_create_property_options_table', 2),
+(16, '2021_03_01_125111_create_property_options_trade_offers_table', 2),
+(17, '2021_03_01_125811_create_product_property', 2);
 
 -- --------------------------------------------------------
 
@@ -122,9 +127,10 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`id`, `status`, `name`, `phone`, `created_at`, `updated_at`, `user_id`) VALUES
-(1, 1, 'Юра', '89501850053', '2021-02-16 11:10:25', NULL, 3),
-(2, 1, 'Юра', '89501850053', '2021-02-16 11:10:25', NULL, 3),
-(3, 1, 'Юра', '89501850053', '2021-02-16 11:10:25', NULL, 3);
+(1, 1, 'Юра', '89501850053', '2021-02-16 09:10:25', NULL, 3),
+(2, 1, 'Юра', '89501850053', '2021-02-16 09:10:25', NULL, 3),
+(3, 1, 'Юра', '89501850053', '2021-02-16 09:10:25', NULL, 3),
+(4, 1, 'Савелий', '6565656565', '2021-03-02 06:18:35', '2021-03-02 06:19:35', 0);
 
 -- --------------------------------------------------------
 
@@ -146,7 +152,12 @@ CREATE TABLE `order_product` (
 --
 
 INSERT INTO `order_product` (`id`, `order_id`, `product_id`, `count`, `created_at`, `updated_at`) VALUES
-(1, 1, 1, 1, '2021-02-16 11:10:25', NULL);
+(1, 1, 1, 1, '2021-02-16 09:10:25', NULL),
+(2, 1, 2, 2, NULL, NULL),
+(3, 1, 4, 4, NULL, NULL),
+(4, 1, 14, 4, NULL, NULL),
+(5, 1, 16, 3, NULL, NULL),
+(7, 4, 21, 5, '2021-03-02 06:18:46', '2021-03-02 06:18:59');
 
 -- --------------------------------------------------------
 
@@ -197,7 +208,7 @@ INSERT INTO `products` (`id`, `category_id`, `name`, `code`, `price`, `descripti
 (18, 1, 'iPhone XS max', 'iphone_XS_max', 70990, 'Вы можете купить Смартфон Apple iPhone XS Max 512Gb Space Grey (FT562RU/A) восст. в магазинах М.Видео по доступной цене. Смартфон Apple iPhone XS Max 512Gb Space Grey (FT562RU/A) восст.: описание, фото, характеристики, отзывы покупателей, инструкция и аксессуары.', 'product/iphone_XS_max.jpg', NULL, NULL, 0, 0, 0, 3, 1, NULL),
 (19, 3, 'Холодильник Indesit DS-4160', 'kholodilnik-indesit-ds-4160', 23990, 'Indesit DS 4180 E – это холодильник высотой 185 сантиметров с нижней морозильной камерой. Класс энергоэффективности А позволит значительно сократить расходы на электроэнергию. Холодильное отделение дополнено капельной технологией размораживания. Она работает в автоматическом режиме, эффективно препятствует образованию наледи на стенках прибора и существенно упрощает уход за холодильником. В морозильной камере предусмотрен контейнер для льда.', 'product/kholodilnik-indesit-ds-4160.jpg', NULL, NULL, 0, 0, 0, 6, 1, NULL),
 (20, 3, 'Холодильник Indesit ITF-120 X', 'kholodilnik-indesit-itf-120-x', 36490, 'Холодильник Indesit ITF 120 X – отличный выбор для большой семьи. В нём реализована работающая в автоматическом режиме система Total No Frost, которая избавит вас от наледи на стенках.', 'product/kholodilnik-indesit-itf-120-x.jpg', NULL, NULL, 0, 0, 1, 3, 1, NULL),
-(21, 3, 'Samsung WF60F1R2E2W', 'samsung_wf60f1r2e2w', 26990, 'Вы можете купить Стиральная машина узкая Samsung WF 60 F1R2E2S/DLP в магазинах М.Видео по доступной цене. Стиральная машина узкая Samsung WF 60 F1R2E2S/DLP: описание, фото, характеристики, отзывы покупателей, инструкция и аксессуары.', 'product/samsung_wf60f1r2e2w.jpg', NULL, NULL, 1, 0, 0, 8, 1, NULL),
+(21, 3, 'Samsung WF60F1R2E2W', 'samsung_wf60f1r2e2w', 26990, 'Вы можете купить Стиральная машина узкая Samsung WF 60 F1R2E2S/DLP в магазинах М.Видео по доступной цене. Стиральная машина узкая Samsung WF 60 F1R2E2S/DLP: описание, фото, характеристики, отзывы покупателей, инструкция и аксессуары.', 'product/samsung_wf60f1r2e2w.jpg', NULL, '2021-03-02 06:19:35', 1, 0, 0, 3, 1, NULL),
 (22, 3, 'Samsung Galaxy Buds', 'samsung-galaxy-buds', 11990, 'Наушники Samsung Buds Live мягко и плотно прилегают к ушам благодаря эргономичной форме, которая обеспечивает комфортную и надёжную посадку. Ими удобно пользоваться в течение всего дня – в офисе, по пути домой, во время длительного авиаперелёта и вечерней пробежки.', 'product/samsung-galaxy-buds.webp', NULL, NULL, 0, 0, 0, 7, 1, NULL),
 (23, 3, 'Стиральная машина Weissgauff WM 4927', 'stiralnaia-mashina-weissgauff-wm-4927', 66990, 'Вы можете купить Стиральная машина стандартная Whirlpool WM E104A S RU в магазинах М.Видео по доступной цене. Стиральная машина стандартная Whirlpool WM E104A S RU: описание, фото, характеристики, отзывы покупателей, инструкция и аксессуары.', 'product/stiralnaia-mashina-weissgauff-wm-4927.webp', NULL, NULL, 0, 0, 0, 4, 1, NULL),
 (24, 2, 'Беспроводные наушники Xiaomi AirDots Pro 2', 'xiaomi_air_dots_pro_2', 3890, 'При разработке наушников специально для смартфонов Xiaomi на базе ОС MIUI был оптимизирован Bluetooth-кодек LHDC. Этот аудиокодек считается одним из самых качественных благодаря чрезвычайно низкой задержке, высокой четкости сигнала и поддержке на уровне системы. Благодаря кодеку LHDC аудиофайлы передаются с битрейтом до 900 кбит/сек, битовой глубиной до 24 бит и частотой дискретизации до 96 кГц. Каждый из наушников оснащен двумя микрофонами с поддержкой технологии шумоподавления ENC. Больше никакого шума улицы, автомобилей и разговоров вокруг. Собеседник будет слышать только ваш голос, причем с минимальными задержками и в отличном качестве. Динамик диаметром 14.2 мм с композитной катушкой и мембраной Благодаря продуманной конструкции динамик передает глубокие и насыщенные низкие частоты, естественные и мягкие средние частоты, не обрезая при этом яркие и чистые высокие частоты. Приятный звук определенно придется по душе внимательных к мелочам меломанов, удивляя наполненностью не слышимых ранее деталей любимой музыки. Для управления наушниками вам даже не нужно доставать телефон. Простыми прикосновениями вы можете управлять воспроизведением музыки, вызывать голосового помощника и отвечать на звонки. Дважды нажмите на любой наушник для принятия или завершения вызова. Когда вы не говорите по телефону, дважды нажмите на левый наушник для вызова голосового помощника. Чтобы начать воспроизведение музыки или поставить ее на паузу дважды нажмите на правый наушник или просто снимите один из них, инфракрасный датчик распознает ваше движение и остановит музыку. Наушники Xiaomi AirDots Pro 2 спроектированы таким образом, при котором обеспечивается плотная и удобная посадка в ушном канале. Даже при длительном ношении вы не будете ощущать дискомфорта. При весе каждого наушника всего по 4.2 грамма вы даже не заметите как носите их.', 'product/xiaomi_air_dots_pro_2.jpg', NULL, NULL, 0, 0, 0, 5, 1, NULL),
@@ -210,6 +221,64 @@ INSERT INTO `products` (`id`, `category_id`, `name`, `code`, `price`, `descripti
 -- --------------------------------------------------------
 
 --
+-- Структура таблицы `product_property`
+--
+
+CREATE TABLE `product_property` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `product_id` int(10) UNSIGNED NOT NULL,
+  `property_id` int(10) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `properties`
+--
+
+CREATE TABLE `properties` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name_en` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `property_options`
+--
+
+CREATE TABLE `property_options` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `property_id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name_en` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `property_option_trade_offer`
+--
+
+CREATE TABLE `property_option_trade_offer` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `property_option_id` int(10) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Структура таблицы `subscripe_products`
 --
 
@@ -218,6 +287,22 @@ CREATE TABLE `subscripe_products` (
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `product_id` int(11) NOT NULL,
   `status` tinyint(4) NOT NULL DEFAULT 0,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `trade_offers`
+--
+
+CREATE TABLE `trade_offers` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `product_id` int(10) UNSIGNED NOT NULL,
+  `property_orders_id` int(10) UNSIGNED NOT NULL,
+  `count` int(10) UNSIGNED NOT NULL DEFAULT 0,
+  `price` double NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -244,8 +329,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `repeatPassword`, `created_at`, `updated_at`, `is_admin`) VALUES
-(1, 'admin', 'admin@mail.ru', '$2y$10$kKy7bOnkfzK5BQd8tzkFOO0pgQw5wZqDC1qAXda6CbLnxtF2C/tH.', NULL, NULL, NULL, 1),
-(2, 'user', 'user@mail.ru', '$2y$10$zUDrpG1upD5MAxQ4fIHurOu4FX08TdMMuEvVk584pbU75Y2Uv4X0.', NULL, NULL, NULL, 0);
+(1, 'admin', 'admin@mail.ru', '$2y$10$AL5TiuyajEJ2x9AcF5Hl5.zl8p4FUd3Pu5.VRAuwV8aBlyQusJAj2', NULL, NULL, NULL, 1),
+(2, 'user', 'user@mail.ru', '$2y$10$0f4psTr07qPtGN4i1uAPu.kOmrs9EASZkMB2J6bI4Ikwnrox9tOYy', NULL, NULL, NULL, 0);
 
 --
 -- Индексы сохранённых таблиц
@@ -288,9 +373,39 @@ ALTER TABLE `products`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Индексы таблицы `product_property`
+--
+ALTER TABLE `product_property`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `properties`
+--
+ALTER TABLE `properties`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `property_options`
+--
+ALTER TABLE `property_options`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `property_option_trade_offer`
+--
+ALTER TABLE `property_option_trade_offer`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Индексы таблицы `subscripe_products`
 --
 ALTER TABLE `subscripe_products`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `trade_offers`
+--
+ALTER TABLE `trade_offers`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -320,19 +435,19 @@ ALTER TABLE `currencies`
 -- AUTO_INCREMENT для таблицы `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT для таблицы `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT для таблицы `order_product`
 --
 ALTER TABLE `order_product`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT для таблицы `products`
@@ -341,9 +456,39 @@ ALTER TABLE `products`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
+-- AUTO_INCREMENT для таблицы `product_property`
+--
+ALTER TABLE `product_property`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT для таблицы `properties`
+--
+ALTER TABLE `properties`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT для таблицы `property_options`
+--
+ALTER TABLE `property_options`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT для таблицы `property_option_trade_offer`
+--
+ALTER TABLE `property_option_trade_offer`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT для таблицы `subscripe_products`
 --
 ALTER TABLE `subscripe_products`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT для таблицы `trade_offers`
+--
+ALTER TABLE `trade_offers`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
